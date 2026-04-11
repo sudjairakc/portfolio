@@ -6,7 +6,7 @@ interface Props {
 
 const {
   title = "Chaichana Sudjairak | Full Stack Developer",
-  description = "Full Stack Software Developer from Thailand specialising in React, Node.js, and React Native.",
+  description = "Full Stack Software Developer from Thailand specialising in React, Node.js, and React Native."
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
@@ -56,20 +56,20 @@ const base = import.meta.env.BASE_URL;
     <!-- Scroll-reveal observer -->
     <script>
       const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
+        entries => {
+          entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add("visible");
               observer.unobserve(entry.target);
             }
           });
         },
-        { threshold: 0.1 }
+        {threshold: 0.1}
       );
 
       document
         .querySelectorAll(".reveal, .reveal-left, .reveal-right")
-        .forEach((el) => observer.observe(el));
+        .forEach(el => observer.observe(el));
     </script>
   </body>
 </html>

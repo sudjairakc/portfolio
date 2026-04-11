@@ -1,10 +1,13 @@
 ---
-import { greeting } from "../../data/portfolio";
+import {greeting} from "../../data/portfolio";
 import SocialMedia from "../SocialMedia.astro";
 import LottiePlayer from "../LottiePlayer.astro";
 ---
 
-<section id="greeting" class="section min-h-screen flex items-center pt-24 pb-12">
+<section
+  id="greeting"
+  class="section min-h-screen flex items-center pt-24 pb-12"
+>
   <div class="flex flex-col-reverse md:flex-row items-center gap-12 w-full">
     <!-- Text -->
     <div class="flex-1 reveal">
@@ -27,16 +30,18 @@ import LottiePlayer from "../LottiePlayer.astro";
           Contact me
         </a>
 
-        {greeting.resumeLink && (
-          <a
-            href={greeting.resumeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all"
-          >
-            Download Resume
-          </a>
-        )}
+        {
+          greeting.resumeLink && (
+            <a
+              href={greeting.resumeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all"
+            >
+              Download Resume
+            </a>
+          )
+        }
       </div>
     </div>
 

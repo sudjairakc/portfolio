@@ -11,7 +11,7 @@ import Projects from "../components/sections/Projects.astro";
 import Contact from "../components/sections/Contact.astro";
 import "../styles/global.css";
 
-import { splashScreen } from "../data/portfolio";
+import {splashScreen} from "../data/portfolio";
 ---
 
 <Layout>
@@ -53,5 +53,7 @@ import { splashScreen } from "../data/portfolio";
     }
   });
 
-  btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  btn.addEventListener("click", () =>
+    window.scrollTo({top: 0, behavior: "smooth"})
+  );
 </script>

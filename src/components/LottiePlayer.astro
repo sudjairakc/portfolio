@@ -5,7 +5,7 @@ interface Props {
   id?: string;
 }
 
-const { src, class: className, id } = Astro.props;
+const {src, class: className, id} = Astro.props;
 const uniqueId = id ?? `lottie-${Math.random().toString(36).slice(2, 8)}`;
 const base = import.meta.env.BASE_URL;
 ---
@@ -15,14 +15,14 @@ const base = import.meta.env.BASE_URL;
 <script>
   import lottie from "lottie-web";
 
-  document.querySelectorAll<HTMLElement>("[data-lottie]").forEach((el) => {
+  document.querySelectorAll<HTMLElement>("[data-lottie]").forEach(el => {
     const path = el.dataset.lottie!;
     lottie.loadAnimation({
       container: el,
       renderer: "svg",
       loop: true,
       autoplay: true,
-      path,
+      path
     });
   });
 </script>

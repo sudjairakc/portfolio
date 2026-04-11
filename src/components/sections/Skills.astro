@@ -1,5 +1,5 @@
 ---
-import { skillsSection } from "../../data/portfolio";
+import {skillsSection} from "../../data/portfolio";
 import LottiePlayer from "../LottiePlayer.astro";
 ---
 
@@ -13,33 +13,43 @@ import LottiePlayer from "../LottiePlayer.astro";
     <!-- Text -->
     <div class="flex-1 reveal">
       <h2 class="text-3xl md:text-4xl font-bold mb-3">{skillsSection.title}</h2>
-      <p class="text-sm font-semibold mb-6 uppercase tracking-wider" style="color: var(--text-sub);">
+      <p
+        class="text-sm font-semibold mb-6 uppercase tracking-wider"
+        style="color: var(--text-sub);"
+      >
         {skillsSection.subTitle}
       </p>
 
       <!-- Skill icons -->
       <div class="flex flex-wrap gap-4 mb-8">
-        {skillsSection.softwareSkills.map((s) => (
-          <div class="skill-icon group flex flex-col items-center gap-1">
-            <div
-              class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl transition-transform hover:scale-110"
-              style="background: var(--bg-secondary); box-shadow: var(--shadow);"
-            >
-              <i class={s.iconClass} style="color: var(--text-sub);"></i>
+        {
+          skillsSection.softwareSkills.map(s => (
+            <div class="skill-icon group flex flex-col items-center gap-1">
+              <div
+                class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl transition-transform hover:scale-110"
+                style="background: var(--bg-secondary); box-shadow: var(--shadow);"
+              >
+                <i class={s.iconClass} style="color: var(--text-sub);" />
+              </div>
+              <span class="tooltip">{s.skillName}</span>
             </div>
-            <span class="tooltip">{s.skillName}</span>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       <!-- Bullet points -->
       <ul class="space-y-2">
-        {skillsSection.skills.map((skill) => (
-          <li class="flex items-start gap-2 text-sm leading-relaxed" style="color: var(--text-sub);">
-            <span class="mt-0.5 shrink-0">⚡</span>
-            <span>{skill.replace(/^⚡\s*/, "")}</span>
-          </li>
-        ))}
+        {
+          skillsSection.skills.map(skill => (
+            <li
+              class="flex items-start gap-2 text-sm leading-relaxed"
+              style="color: var(--text-sub);"
+            >
+              <span class="mt-0.5 shrink-0">⚡</span>
+              <span>{skill.replace(/^⚡\s*/, "")}</span>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>
