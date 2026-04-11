@@ -1,0 +1,48 @@
+---
+import { greeting } from "../../data/portfolio";
+import SocialMedia from "../SocialMedia.astro";
+import LottiePlayer from "../LottiePlayer.astro";
+---
+
+<section id="greeting" class="section min-h-screen flex items-center pt-24 pb-12">
+  <div class="flex flex-col-reverse md:flex-row items-center gap-12 w-full">
+    <!-- Text -->
+    <div class="flex-1 reveal">
+      <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-4">
+        {greeting.title}
+        <span class="wave">👋</span>
+      </h1>
+
+      <p class="text-lg leading-relaxed mb-6" style="color: var(--text-sub);">
+        {greeting.subTitle}
+      </p>
+
+      <SocialMedia />
+
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a
+          href="#contact"
+          class="px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-hover transition-colors shadow-md hover:shadow-lg"
+        >
+          Contact me
+        </a>
+
+        {greeting.resumeLink && (
+          <a
+            href={greeting.resumeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all"
+          >
+            Download Resume
+          </a>
+        )}
+      </div>
+    </div>
+
+    <!-- Lottie -->
+    <div class="flex-1 flex justify-center reveal-right">
+      <LottiePlayer src="lottie/sitPerson.json" class="w-full max-w-sm" />
+    </div>
+  </div>
+</section>

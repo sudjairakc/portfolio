@@ -1,0 +1,33 @@
+---
+import { socialMediaLinks } from "../data/portfolio";
+
+const links = [
+  { key: "github", icon: "fab fa-github", label: "GitHub", color: "#333" },
+  { key: "linkedin", icon: "fab fa-linkedin-in", label: "LinkedIn", color: "#0077B5" },
+  { key: "gmail", icon: "fas fa-envelope", label: "Email", color: "#EA4335", href: `mailto:${socialMediaLinks.gmail}` },
+  { key: "gitlab", icon: "fab fa-gitlab", label: "GitLab", color: "#FC6D26" },
+  { key: "facebook", icon: "fab fa-facebook-f", label: "Facebook", color: "#1877F2" },
+] as const;
+---
+
+<div class="flex flex-wrap gap-3 mt-4">
+  {links.map(({ key, icon, label, color, href }) => {
+    const url = href ?? socialMediaLinks[key as keyof typeof socialMediaLinks];
+    if (!url) return null;
+    return (
+      <a
+        href={url as string}
+        target={key === "gmail" ? undefined : "_blank"}
+        rel="noopener noreferrer"
+        aria-label={label}
+        class="group relative w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-200 hover:scale-110 hover:shadow-lg"
+        style={`border-color: ${color}22; color: ${color};`}
+      >
+        <i class={`${icon} text-sm`}></i>
+        <span class="absolute -bottom-7 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+          {label}
+        </span>
+      </a>
+    );
+  })}
+</div>

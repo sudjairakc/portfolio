@@ -1,0 +1,76 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+import { greeting } from "../data/portfolio";
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-shadow duration-300"
+  style="background: var(--nav-bg);"
+>
+  <nav class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#greeting" class="font-mono text-lg font-semibold hover:text-primary transition-colors">
+      <span style="color: var(--text-sub)">&lt;</span>
+      <span>{greeting.username}</span>
+      <span style="color: var(--text-sub)">/&gt;</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <li><a href="#skills" class="hover:text-primary transition-colors">Skills</a></li>
+      <li><a href="#education" class="hover:text-primary transition-colors">Education</a></li>
+      <li><a href="#experience" class="hover:text-primary transition-colors">Experience</a></li>
+      <li><a href="#projects" class="hover:text-primary transition-colors">Projects</a></li>
+      <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+      <li><ThemeToggle /></li>
+    </ul>
+
+    <!-- Mobile: toggle + hamburger -->
+    <div class="flex items-center gap-3 md:hidden">
+      <ThemeToggle />
+      <button
+        id="mobile-menu-btn"
+        aria-label="Open menu"
+        class="w-8 h-8 flex flex-col justify-center items-center gap-1.5"
+      >
+        <span class="block w-6 h-0.5 bg-current transition-all duration-300"></span>
+        <span class="block w-6 h-0.5 bg-current transition-all duration-300"></span>
+        <span class="block w-6 h-0.5 bg-current transition-all duration-300"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden border-t px-6 py-4"
+    style="border-color: var(--card-border); background: var(--nav-bg);"
+  >
+    <ul class="flex flex-col gap-4 text-sm font-medium">
+      <li><a href="#skills" class="hover:text-primary transition-colors">Skills</a></li>
+      <li><a href="#education" class="hover:text-primary transition-colors">Education</a></li>
+      <li><a href="#experience" class="hover:text-primary transition-colors">Experience</a></li>
+      <li><a href="#projects" class="hover:text-primary transition-colors">Projects</a></li>
+      <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn")!;
+  const menu = document.getElementById("mobile-menu")!;
+  const header = document.getElementById("site-header")!;
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+
+  menu.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => menu.classList.add("hidden"));
+  });
+
+  window.addEventListener("scroll", () => {
+    header.style.boxShadow = window.scrollY > 10 ? "var(--shadow)" : "none";
+  });
+</script>
