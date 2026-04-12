@@ -125,6 +125,20 @@ Push ไปที่ branch `master` → GitHub Actions จะ build และ d
 
 ดู workflow ได้ที่ [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
 
+### GitHub Pages Settings
+
+ใน repo **Settings → Pages → Build and deployment** ต้องตั้งค่าดังนี้:
+
+- **Source:** `Deploy from a branch`
+- **Branch:** `gh-pages` / `/ (root)`
+
+> ⚠️ ห้ามเลือก "GitHub Actions" เพราะจะทำให้ Jekyll พยายาม build source code และ error
+> Workflow `deploy.yml` จะ push built files ไปที่ `gh-pages` branch เอง
+
+### Formatting
+
+รัน `npm run format` ก่อน commit ทุกครั้งที่แก้ไข `.astro`, `.ts`, หรือ `.css`
+
 ---
 
 ## License

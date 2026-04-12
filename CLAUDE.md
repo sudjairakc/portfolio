@@ -105,3 +105,18 @@ Push to `master` → GitHub Actions builds and pushes `dist/` to the `gh-pages` 
 Live site: **https://sudjairakc.github.io/portfolio**
 
 The `base` in `astro.config.mjs` is `"portfolio"`. Do not change this without also updating the GitHub Pages settings.
+
+### GitHub Pages Settings (important)
+
+In repo **Settings → Pages → Build and deployment**:
+- **Source** must be set to **"Deploy from a branch"**
+- **Branch** must be **`gh-pages`** / `/ (root)`
+
+Do NOT set Source to "GitHub Actions" — that triggers Jekyll and will fail on `.astro` files.
+The actual build is handled by `.github/workflows/deploy.yml`, which pushes `dist/` to `gh-pages`.
+
+### Prettier / Formatting
+
+- Run `npm run format` before committing after editing any `.astro`, `.ts`, or `.css` file.
+- `prettier-plugin-astro` is required and declared in `.prettierrc` — do not remove it.
+- `dist/` and `.astro/` are excluded via `.gitignore` (which Prettier uses as its ignore path).

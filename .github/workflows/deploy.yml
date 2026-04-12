@@ -27,9 +27,13 @@ jobs:
       - name: Build 🏗️
         run: npm run build
 
+      - name: Add .nojekyll 🚫
+        run: touch dist/.nojekyll
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: dist
+          clean: true
