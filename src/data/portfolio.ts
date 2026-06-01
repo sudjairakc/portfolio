@@ -1,6 +1,6 @@
 /* Edit this file to update your portfolio content */
 
-import {getYear} from "../utils/date";
+import { getYear } from "../utils/date";
 
 // ─── Splash Screen ────────────────────────────────────────────────────────────
 
@@ -15,7 +15,7 @@ export const greeting = {
   username: "ChaichanaS",
   title: "Hey there! I'm James.",
   subTitle: `Middle-to-Senior Full Stack Developer from Thailand with ${getYear() - 2021}+ years of experience
-    owning features end-to-end across React, React Native, and Node.js.
+    owning features end-to-end across React, React Native, Node.js, TypeScript, JavaScript, and Go.
     Proven track record of high-velocity delivery, interim technical leadership,
     and translating complex data into executive-level insights.`,
   resumeLink:
@@ -49,24 +49,24 @@ export const skillsSection = {
       skillName: "JavaScript (ES6+)",
       iconClass: "devicon-javascript-plain colored"
     },
-    {skillName: "TypeScript", iconClass: "devicon-typescript-plain colored"},
-    {skillName: "React.js", iconClass: "devicon-react-original colored"},
-    {skillName: "React Native", iconClass: "devicon-react-original colored"},
-    {skillName: "Next.js", iconClass: "devicon-nextjs-plain"},
+    { skillName: "TypeScript", iconClass: "devicon-typescript-plain colored" },
+    { skillName: "React.js", iconClass: "devicon-react-original colored" },
+    { skillName: "React Native", iconClass: "devicon-react-original colored" },
+    { skillName: "Next.js", iconClass: "devicon-nextjs-plain" },
     // Backend & DB
-    {skillName: "Node.js", iconClass: "devicon-nodejs-plain colored"},
-    {skillName: "Golang", iconClass: "devicon-go-plain colored"},
-    {skillName: "PostgreSQL", iconClass: "devicon-postgresql-plain colored"},
-    {skillName: "MariaDB", iconClass: "devicon-mariadb-plain colored"},
-    {skillName: "MongoDB", iconClass: "devicon-mongodb-plain colored"},
-    {skillName: "Redis", iconClass: "devicon-redis-plain colored"},
+    { skillName: "Node.js", iconClass: "devicon-nodejs-plain colored" },
+    { skillName: "Golang", iconClass: "devicon-go-plain colored" },
+    { skillName: "PostgreSQL", iconClass: "devicon-postgresql-plain colored" },
+    { skillName: "MariaDB", iconClass: "devicon-mariadb-plain colored" },
+    { skillName: "MongoDB", iconClass: "devicon-mongodb-plain colored" },
+    { skillName: "Redis", iconClass: "devicon-redis-plain colored" },
     // DevOps & Infra
-    {skillName: "Docker", iconClass: "devicon-docker-plain colored"},
-    {skillName: "AWS", iconClass: "devicon-amazonwebservices-plain colored"},
-    {skillName: "Git", iconClass: "devicon-git-plain colored"},
-    {skillName: "GitLab", iconClass: "devicon-gitlab-plain colored"},
+    { skillName: "Docker", iconClass: "devicon-docker-plain colored" },
+    { skillName: "AWS", iconClass: "devicon-amazonwebservices-plain colored" },
+    { skillName: "Git", iconClass: "devicon-git-plain colored" },
+    { skillName: "GitLab", iconClass: "devicon-gitlab-plain colored" },
     // Testing & Tools
-    {skillName: "Postman", iconClass: "devicon-postman-plain colored"}
+    { skillName: "Postman", iconClass: "devicon-postman-plain colored" }
   ]
 };
 
@@ -103,7 +103,8 @@ export const workExperiences = [
       "Backend & Business Logic: Rebuilt premium search from exact-match to range-based lookup; designed dynamic sum-insured adjustment to expand plan visibility across all insurers. Implemented commission logic covering Tier Bonus, installment budget controls, and multiple payment conditions. Currently one of the lead developers on a major backend migration — splitting a large, aging Node.js v10 codebase (hundreds of APIs in a single project) into properly separated Go microservices.",
       "UI/UX & Notifications: Led redesign of four core screens (Profile, Premium Check, Level-Up, Plan Comparison) with a cached visualization layer. Built a full notification pipeline covering renewal reminders, licence expiry alerts, badge counts, filters, and mark-as-read.",
       "Data, Analytics & Scraping: Analysed 5,500+ competitor benchmark records, built web scrapers for market data collection, compiled missing Van and EV models cross-referenced against market pricing, and presented findings with visualisations to C-level stakeholders.",
-      "Leadership & Reliability: Stepped up as interim tech lead during senior absences — owned delivery and made architecture calls independently. Resolved critical production issues (Android crash, random-state bugs) with minimal customer impact, while handling IT support in parallel without affecting delivery timelines."
+      "Leadership & Reliability: Stepped up as interim tech lead during senior absences — owned delivery and made architecture calls independently. Resolved critical production issues (Android crash, random-state bugs) with minimal customer impact, while handling IT support in parallel without affecting delivery timelines.",
+      "Self-initiated: Built a real-time collaborative music app on personal time after noticing the team had no good way to share music in the office — complete with a SoundPad and text-to-speech so the team could drop memes and sound effects mid-session. Improved team atmosphere and helped new members settle in naturally from day one."
     ]
   },
   {
