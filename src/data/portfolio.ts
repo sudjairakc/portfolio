@@ -1,6 +1,6 @@
 /* Edit this file to update your portfolio content */
 
-import { getYear } from "../utils/date";
+import {getYear} from "../utils/date";
 
 // ─── Splash Screen ────────────────────────────────────────────────────────────
 
@@ -49,24 +49,24 @@ export const skillsSection = {
       skillName: "JavaScript (ES6+)",
       iconClass: "devicon-javascript-plain colored"
     },
-    { skillName: "TypeScript", iconClass: "devicon-typescript-plain colored" },
-    { skillName: "React.js", iconClass: "devicon-react-original colored" },
-    { skillName: "React Native", iconClass: "devicon-react-original colored" },
-    { skillName: "Next.js", iconClass: "devicon-nextjs-plain" },
+    {skillName: "TypeScript", iconClass: "devicon-typescript-plain colored"},
+    {skillName: "React.js", iconClass: "devicon-react-original colored"},
+    {skillName: "React Native", iconClass: "devicon-react-original colored"},
+    {skillName: "Next.js", iconClass: "devicon-nextjs-plain"},
     // Backend & DB
-    { skillName: "Node.js", iconClass: "devicon-nodejs-plain colored" },
-    { skillName: "Golang", iconClass: "devicon-go-plain colored" },
-    { skillName: "PostgreSQL", iconClass: "devicon-postgresql-plain colored" },
-    { skillName: "MariaDB", iconClass: "devicon-mariadb-plain colored" },
-    { skillName: "MongoDB", iconClass: "devicon-mongodb-plain colored" },
-    { skillName: "Redis", iconClass: "devicon-redis-plain colored" },
+    {skillName: "Node.js", iconClass: "devicon-nodejs-plain colored"},
+    {skillName: "Golang", iconClass: "devicon-go-plain colored"},
+    {skillName: "PostgreSQL", iconClass: "devicon-postgresql-plain colored"},
+    {skillName: "MariaDB", iconClass: "devicon-mariadb-plain colored"},
+    {skillName: "MongoDB", iconClass: "devicon-mongodb-plain colored"},
+    {skillName: "Redis", iconClass: "devicon-redis-plain colored"},
     // DevOps & Infra
-    { skillName: "Docker", iconClass: "devicon-docker-plain colored" },
-    { skillName: "AWS", iconClass: "devicon-amazonwebservices-plain colored" },
-    { skillName: "Git", iconClass: "devicon-git-plain colored" },
-    { skillName: "GitLab", iconClass: "devicon-gitlab-plain colored" },
+    {skillName: "Docker", iconClass: "devicon-docker-plain colored"},
+    {skillName: "AWS", iconClass: "devicon-amazonwebservices-plain colored"},
+    {skillName: "Git", iconClass: "devicon-git-plain colored"},
+    {skillName: "GitLab", iconClass: "devicon-gitlab-plain colored"},
     // Testing & Tools
-    { skillName: "Postman", iconClass: "devicon-postman-plain colored" }
+    {skillName: "Postman", iconClass: "devicon-postman-plain colored"}
   ]
 };
 
