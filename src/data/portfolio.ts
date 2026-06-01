@@ -1,6 +1,6 @@
 /* Edit this file to update your portfolio content */
 
-import {getYear} from "../utils/date";
+import { getYear } from "../utils/date";
 
 // ─── Splash Screen ────────────────────────────────────────────────────────────
 
@@ -38,10 +38,11 @@ export const skillsSection = {
   title: "What I do",
   subTitle: "MIDDLE-TO-SENIOR FULL STACK DEVELOPER — WEB, MOBILE, AND BACKEND",
   skills: [
-    `⚡ ${getYear() - 2021}+ years owning features end-to-end across React, React Native, and Node.js.`,
-    "⚡ Interim technical lead experience — architecture decisions, delivery management, incident response.",
-    "⚡ Data analysis and executive-level reporting with visualisations for C-level stakeholders.",
+    `⚡ ${getYear() - 2021}+ years of experience taking features from concept to production across React, React Native, Node.js, and Go.`,
+    "⚡ Track record of fast, independent delivery.",
+    "⚡ Interim technical leadership and presenting data-backed findings to C-level stakeholders.",
     "⚡ Strong cross-functional communication with designers, PMs, and non-technical teams."
+
   ],
   softwareSkills: [
     // Frontend & Mobile
@@ -49,23 +50,24 @@ export const skillsSection = {
       skillName: "JavaScript (ES6+)",
       iconClass: "devicon-javascript-plain colored"
     },
-    {skillName: "TypeScript", iconClass: "devicon-typescript-plain colored"},
-    {skillName: "React.js", iconClass: "devicon-react-original colored"},
-    {skillName: "React Native", iconClass: "devicon-react-original colored"},
-    {skillName: "Next.js", iconClass: "devicon-nextjs-plain"},
+    { skillName: "TypeScript", iconClass: "devicon-typescript-plain colored" },
+    { skillName: "React.js", iconClass: "devicon-react-original colored" },
+    { skillName: "React Native", iconClass: "devicon-react-original colored" },
+    { skillName: "Next.js", iconClass: "devicon-nextjs-plain" },
     // Backend & DB
-    {skillName: "Node.js", iconClass: "devicon-nodejs-plain colored"},
-    {skillName: "Golang", iconClass: "devicon-go-plain colored"},
-    {skillName: "PostgreSQL", iconClass: "devicon-postgresql-plain colored"},
-    {skillName: "MariaDB", iconClass: "devicon-mariadb-plain colored"},
-    {skillName: "MongoDB", iconClass: "devicon-mongodb-plain colored"},
+    { skillName: "Node.js", iconClass: "devicon-nodejs-plain colored" },
+    { skillName: "Golang", iconClass: "devicon-go-plain colored" },
+    { skillName: "PostgreSQL", iconClass: "devicon-postgresql-plain colored" },
+    { skillName: "MariaDB", iconClass: "devicon-mariadb-plain colored" },
+    { skillName: "MongoDB", iconClass: "devicon-mongodb-plain colored" },
+    { skillName: "Redis", iconClass: "devicon-redis-plain colored" },
     // DevOps & Infra
-    {skillName: "Docker", iconClass: "devicon-docker-plain colored"},
-    {skillName: "AWS", iconClass: "devicon-amazonwebservices-plain colored"},
-    {skillName: "Git", iconClass: "devicon-git-plain colored"},
-    {skillName: "GitLab", iconClass: "devicon-gitlab-plain colored"},
+    { skillName: "Docker", iconClass: "devicon-docker-plain colored" },
+    { skillName: "AWS", iconClass: "devicon-amazonwebservices-plain colored" },
+    { skillName: "Git", iconClass: "devicon-git-plain colored" },
+    { skillName: "GitLab", iconClass: "devicon-gitlab-plain colored" },
     // Testing & Tools
-    {skillName: "Postman", iconClass: "devicon-postman-plain colored"}
+    { skillName: "Postman", iconClass: "devicon-postman-plain colored" }
   ]
 };
 
@@ -98,12 +100,11 @@ export const workExperiences = [
     link: "https://www.fininsurance.co.th/",
     date: "June 2023 – Present",
     descBullets: [
-      "Sole developer for the insurance plan comparison module — shipped dynamic filters, coupon system, and sum-insured range logic in 5 days.",
-      "Designed range-based premium search and dynamic sum-insured adjustment, expanding plan visibility across all insurers.",
-      "Analysed 5,500+ competitive benchmark records and presented findings with visualisations to C-level stakeholders.",
-      "Built web scrapers for competitor data collection and maintained comprehensive API test suites in Apidog.",
-      "Acted as interim technical lead during senior absences — managed delivery and made architecture decisions independently.",
-      "Resolved mission-critical production issues with zero-to-minimal customer impact."
+      "Feature Delivery: Sole developer on the insurance plan comparison module — shipped dynamic filters, color-coded plan labels, auto-apply coupon system, adjustable sum-insured range, and plan-sharing end-to-end in 5 days.",
+      "Backend & Business Logic: Rebuilt premium search from exact-match to range-based lookup; designed dynamic sum-insured adjustment to expand plan visibility across all insurers. Implemented commission logic covering Tier Bonus, installment budget controls, and multiple payment conditions. Currently one of the lead developers on a major backend migration — splitting a large, aging Node.js v10 codebase (hundreds of APIs in a single project) into properly separated Go microservices.",
+      "UI/UX & Notifications: Led redesign of four core screens (Profile, Premium Check, Level-Up, Plan Comparison) with a cached visualization layer. Built a full notification pipeline covering renewal reminders, licence expiry alerts, badge counts, filters, and mark-as-read.",
+      "Data, Analytics & Scraping: Analysed 5,500+ competitor benchmark records, built web scrapers for market data collection, compiled missing Van and EV models cross-referenced against market pricing, and presented findings with visualisations to C-level stakeholders.",
+      "Leadership & Reliability: Stepped up as interim tech lead during senior absences — owned delivery and made architecture calls independently. Resolved critical production issues (Android crash, random-state bugs) with minimal customer impact, while handling IT support in parallel without affecting delivery timelines."
     ]
   },
   {
@@ -113,9 +114,9 @@ export const workExperiences = [
     link: "https://www.customix.co/",
     date: "April 2021 – May 2023",
     descBullets: [
-      "Built scalable web and mobile apps for enterprise platforms using React, React Native, and Node.js.",
-      "Architected a reusable component library that accelerated dev velocity by 20% and ensured cross-platform design consistency.",
-      "Optimised RESTful API connectivity and partnered with designers and PMs to ship complex features on schedule."
+      "Full-Stack Development: Built web and mobile apps for enterprise platforms using React, React Native, Node.js, and Go.",
+      "UI Component Library: Designed a reusable component library that improved dev velocity by 20% and kept design consistent across platforms.",
+      "API & Collaboration: Improved RESTful API integration and worked closely with designers and PMs to deliver complex features on schedule."
     ]
   },
   {
@@ -175,4 +176,4 @@ export const contactInfo = {
 
 // ─── Misc ─────────────────────────────────────────────────────────────────────
 
-export const isHireable = false;
+export const isHireable = true;
