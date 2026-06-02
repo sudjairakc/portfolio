@@ -6,48 +6,78 @@ import LottiePlayer from "../LottiePlayer.astro";
 
 <section
   id="greeting"
-  class="section min-h-screen flex items-center pt-24 pb-12"
+  data-hero
+  class="relative min-h-screen flex flex-col items-center justify-center text-center px-2 pt-24 pb-16 overflow-hidden"
 >
-  <div class="flex flex-col-reverse md:flex-row items-center gap-12 w-full">
-    <!-- Text -->
-    <div class="flex-1 reveal">
-      <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-4">
-        {greeting.title}
-        <span class="wave">👋</span>
-      </h1>
+  <!-- Ambient colour blobs that softly drift (CSS keyframes) -->
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
 
-      <p class="text-lg leading-relaxed mb-6" style="color: var(--text-sub);">
-        {greeting.subTitle}
-      </p>
+  <!-- Parallax Lottie, sitting behind the headline -->
+  <div
+    data-parallax
+    data-parallax-speed="120"
+    class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15"
+    aria-hidden="true"
+  >
+    <LottiePlayer src="lottie/sitPerson.json" class="w-full max-w-2xl" />
+  </div>
 
-      <SocialMedia />
+  <!-- Foreground content — scrubs out on scroll -->
+  <div data-hero-content class="relative z-10 max-w-3xl mx-auto">
+    <p class="hero-kicker mb-4 reveal">Full Stack Developer · Thailand</p>
 
-      <div class="flex flex-wrap gap-3 mt-8">
-        <a
-          href="#contact"
-          class="px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-hover transition-colors shadow-md hover:shadow-lg"
-        >
-          Contact me
-        </a>
+    <h1
+      class="hero-title text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.05] mb-6 reveal"
+    >
+      {greeting.title}
+      <span class="wave">👋</span>
+    </h1>
 
-        {
-          greeting.resumeLink && (
-            <a
-              href={greeting.resumeLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all"
-            >
-              Download Resume
-            </a>
-          )
-        }
-      </div>
+    <p
+      class="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8 reveal"
+      style="color: var(--text-sub);"
+    >
+      {greeting.subTitle}
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-8 reveal">
+      <a
+        href="#contact"
+        data-motion-btn
+        class="px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-hover transition-colors shadow-md hover:shadow-lg"
+      >
+        Contact me
+      </a>
+
+      {
+        greeting.resumeLink && (
+          <a
+            href={greeting.resumeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-motion-btn
+            class="px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold transition-colors hover:bg-primary hover:text-white"
+          >
+            Download Resume
+          </a>
+        )
+      }
     </div>
 
-    <!-- Lottie -->
-    <div class="flex-1 flex justify-center reveal-right">
-      <LottiePlayer src="lottie/sitPerson.json" class="w-full max-w-sm" />
+    <div class="flex justify-center reveal">
+      <SocialMedia />
     </div>
   </div>
+
+  <!-- Scroll-down cue -->
+  <a
+    href="#skills"
+    aria-label="Scroll to content"
+    class="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-sm"
+    style="color: var(--text-sub);"
+  >
+    <span>Scroll</span>
+    <i class="fas fa-chevron-down"></i>
+  </a>
 </section>

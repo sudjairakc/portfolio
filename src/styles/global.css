@@ -38,6 +38,17 @@ html.dark {
 /* ── Base ───────────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+  /* Apple-style snap: each full-screen section eases into place.
+     `proximity` (not `mandatory`) so tall sections never trap the scroll. */
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 4rem; /* clears the fixed h-16 header */
+}
+
+/* Don't snap-trap on touch devices where it can feel sticky */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+  }
 }
 
 body {
@@ -105,11 +116,190 @@ body {
   pointer-events: none;
 }
 
-/* ── Utility: section wrapper ───────────────────────────────────────────────── */
+/* ── Full-screen snap sections ──────────────────────────────────────────────── */
+/* Each section fills the viewport and centres its content. min-height (not
+   fixed height) lets sections taller than the screen grow naturally. */
 .section {
-  padding: 4rem 1.5rem;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 1.5rem;
+  scroll-snap-align: start;
+}
+
+/* Constrain the readable content width inside a full-bleed section. */
+.section-inner {
+  width: 100%;
   max-width: 1100px;
   margin: 0 auto;
+}
+
+/* The hero is its own full-screen block — let it snap too. */
+[data-hero] {
+  scroll-snap-align: start;
+}
+
+/* ── Scroll-driven effects ──────────────────────────────────────────────────── */
+/* Top scroll-progress bar (Apple-style). scaleX is driven by Motion. */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 60;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-primary-hover)
+  );
+}
+
+/* Elements driven by Motion (parallax / scrub) must NOT have a CSS transition
+   on transform, or it fights the per-frame style updates. */
+[data-parallax],
+[data-hero-content] {
+  will-change: transform;
+}
+
+/* ── Apple-style hero ───────────────────────────────────────────────────────── */
+.hero-kicker {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.hero-title {
+  background: linear-gradient(
+    120deg,
+    var(--text) 0%,
+    var(--color-primary) 45%,
+    var(--color-primary-hover) 70%,
+    var(--text) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.02em;
+  animation: hero-gradient 9s ease-in-out infinite;
+}
+
+@keyframes hero-gradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Gradient accent for section headings — readable text that fades into the
+   brand colour. Apply with class `gradient-heading`. */
+.gradient-heading {
+  background: linear-gradient(
+    90deg,
+    var(--text) 35%,
+    var(--color-primary) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  width: fit-content;
+}
+
+.gradient-heading.mx-auto,
+.text-center .gradient-heading,
+.gradient-heading.text-center {
+  margin-inline: auto;
+}
+
+/* ── Ambient colour blobs (soft, blurred, drifting) ─────────────────────────── */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+.blob-1 {
+  width: 22rem;
+  height: 22rem;
+  background: var(--color-primary);
+  top: 8%;
+  left: -4rem;
+  animation: blob-float-a 14s ease-in-out infinite;
+}
+
+.blob-2 {
+  width: 26rem;
+  height: 26rem;
+  background: var(--color-primary-hover);
+  bottom: 6%;
+  right: -5rem;
+  animation: blob-float-b 18s ease-in-out infinite;
+}
+
+@keyframes blob-float-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(2rem, 1.5rem) scale(1.1);
+  }
+}
+
+@keyframes blob-float-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-2.5rem, -1rem) scale(0.92);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title {
+    animation: none;
+  }
+  .blob {
+    animation: none;
+  }
+}
+
+/* Bouncing scroll-down cue */
+.scroll-cue {
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+/* Honour reduced-motion: disable scroll-bob; scrub/parallax are skipped in JS */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue {
+    animation: none;
+  }
 }
 
 /* ── Skill icon tooltip ─────────────────────────────────────────────────────── */

@@ -9,6 +9,8 @@ import Education from "../components/sections/Education.astro";
 import WorkExperience from "../components/sections/WorkExperience.astro";
 import Projects from "../components/sections/Projects.astro";
 import Contact from "../components/sections/Contact.astro";
+import MotionButtons from "../components/MotionButtons.astro";
+import ScrollEffects from "../components/ScrollEffects.astro";
 import "../styles/global.css";
 
 import {splashScreen} from "../data/portfolio";
@@ -16,6 +18,9 @@ import {splashScreen} from "../data/portfolio";
 
 <Layout>
   {splashScreen.enabled && <SplashScreen />}
+
+  <!-- Top scroll-progress indicator -->
+  <div id="scroll-progress"></div>
 
   <Header />
 
@@ -34,10 +39,14 @@ import {splashScreen} from "../data/portfolio";
   <button
     id="scroll-top"
     aria-label="Scroll to top"
-    class="fixed bottom-6 right-6 w-10 h-10 rounded-full bg-primary text-white shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-primary-hover hover:scale-110 flex items-center justify-center z-40"
+    data-motion-btn
+    class="fixed bottom-6 right-6 w-10 h-10 rounded-full bg-primary text-white shadow-lg opacity-0 pointer-events-none transition-[opacity,background-color] duration-300 hover:bg-primary-hover flex items-center justify-center z-40"
   >
     <i class="fas fa-arrow-up text-sm"></i>
   </button>
+
+  <MotionButtons />
+  <ScrollEffects />
 </Layout>
 
 <script>

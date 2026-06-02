@@ -7,7 +7,9 @@ import LottiePlayer from "../LottiePlayer.astro";
 <section id="contact" class="section" style="background: var(--bg-secondary);">
   <div class="flex flex-col md:flex-row items-center gap-12 max-w-4xl mx-auto">
     <div class="flex-1 reveal">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">{contactInfo.title}</h2>
+      <h2 class="gradient-heading text-3xl md:text-4xl font-bold mb-4">
+        {contactInfo.title}
+      </h2>
       <p class="text-lg mb-6" style="color: var(--text-sub);">
         {contactInfo.subtitle}
       </p>
@@ -36,7 +38,9 @@ import LottiePlayer from "../LottiePlayer.astro";
     </div>
 
     <div class="flex-1 flex justify-center reveal-right">
-      <LottiePlayer src="lottie/email.json" class="w-full max-w-xs" />
+      <div data-parallax data-parallax-speed="50" class="w-full max-w-xs">
+        <LottiePlayer src="lottie/email.json" class="w-full" />
+      </div>
     </div>
   </div>
 </section>

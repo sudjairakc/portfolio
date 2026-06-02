@@ -10,11 +10,13 @@ const base = import.meta.env.BASE_URL;
   style="background: var(--bg-secondary);"
 >
   <div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center reveal">
+    <h2
+      class="gradient-heading text-3xl md:text-4xl font-bold mb-10 text-center reveal"
+    >
       Experience
     </h2>
 
-    <div class="space-y-6">
+    <div data-stagger class="space-y-6">
       {
         workExperiences.map(card => (
           <div
@@ -34,6 +36,7 @@ const base = import.meta.env.BASE_URL;
                 <img
                   src={`${base}/images/${card.companyLogo}`}
                   alt={card.company}
+                  data-motion-zoom
                   class="w-14 h-14 rounded-xl object-contain bg-white p-1.5 shadow-sm"
                   loading="lazy"
                 />
