@@ -1,5 +1,7 @@
 ---
-import {socialMediaLinks} from "../data/portfolio";
+import {getContent, socialMediaLinks} from "../data/portfolio";
+
+const t = getContent(Astro.currentLocale).footer;
 
 const socials = [
   {
@@ -38,16 +40,14 @@ const socials = [
       <span class="font-mono text-sm font-semibold gradient-text"
         >&lt; ChaichanaS /&gt;</span
       >
-      <span class="text-sub text-xs"
-        >AI-focused Full Stack Developer · Thailand</span
-      >
+      <span class="text-sub text-xs">{t.role}</span>
       <a
         href="https://sudjairakc.github.io"
         target="_blank"
         rel="noopener"
         class="mt-1 inline-flex items-center justify-center gap-1 text-xs font-medium text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white sm:justify-start"
       >
-        Explore the full project hub
+        {t.projectHub}
         <svg
           class="h-3 w-3"
           viewBox="0 0 24 24"
@@ -91,7 +91,7 @@ const socials = [
 
   <div class="section !py-0 pb-8">
     <p class="text-sub text-xs text-center">
-      © 2026 Chaichana Sudjairak. Built with Astro &amp; Tailwind.
+      {t.copyright}
     </p>
   </div>
 </footer>

@@ -1,5 +1,7 @@
 ---
-import {contactInfo, socialMediaLinks} from "../../data/portfolio";
+import {getContent, socialMediaLinks} from "../../data/portfolio";
+
+const t = getContent(Astro.currentLocale).contact;
 ---
 
 <section id="contact" class="section reveal">
@@ -28,19 +30,20 @@ import {contactInfo, socialMediaLinks} from "../../data/portfolio";
     <div
       class="glass flex flex-col items-center text-center px-6 py-14 md:px-14 md:py-20"
     >
-      <span class="eyebrow mb-4">Get in touch</span>
+      <span class="eyebrow mb-4">{t.eyebrow}</span>
       <h2
         class="text-3xl md:text-5xl font-bold tracking-tight mb-5 leading-tight"
       >
-        Have an idea worth <span class="gradient-text">building?</span>
+        {t.headingPre}
+        <span class="gradient-text">{t.headingEm}</span>
       </h2>
       <p class="text-sub text-base md:text-lg max-w-xl mb-8">
-        {contactInfo.subtitle}
+        {t.subtitle}
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
-        <a href={`mailto:${contactInfo.email}`} class="btn-gradient">
-          Email Me
+        <a href={`mailto:${t.email}`} class="btn-gradient">
+          {t.emailBtn}
         </a>
         <a
           href={socialMediaLinks.github}
@@ -61,12 +64,9 @@ import {contactInfo, socialMediaLinks} from "../../data/portfolio";
       </div>
 
       {
-        contactInfo.phone && (
-          <a
-            href={`tel:${contactInfo.phone.replace(/[^0-9+]/g, "")}`}
-            class="pill"
-          >
-            {contactInfo.phone}
+        t.phone && (
+          <a href={`tel:${t.phone.replace(/[^0-9+]/g, "")}`} class="pill">
+            {t.phone}
           </a>
         )
       }

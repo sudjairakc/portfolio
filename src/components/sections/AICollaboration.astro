@@ -1,5 +1,7 @@
 ---
-import {aiSection} from "../../data/portfolio";
+import {getContent} from "../../data/portfolio";
+
+const aiSection = getContent(Astro.currentLocale).ai;
 
 // Per-rank visual treatment. specialist = strongest emphasis (glow ring),
 // advanced = medium, baseline = subtle.
@@ -35,10 +37,8 @@ const rankStyles = {
       {aiSection.eyebrow}
     </span>
     <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
-      {aiSection.title.split(" ")[0]}{" "}
-      <span class="gradient-text"
-        >{aiSection.title.split(" ").slice(1).join(" ")}</span
-      >
+      {aiSection.headingPre}{" "}
+      <span class="gradient-text">{aiSection.headingEm}</span>
     </h2>
     <p class="mt-4 text-lg font-semibold sm:text-xl">{aiSection.headline}</p>
     <p class="text-sub mt-3 text-base leading-relaxed">{aiSection.intro}</p>
@@ -60,7 +60,7 @@ const rankStyles = {
 
   <!-- 2. Model lineup -->
   <div class="mt-8">
-    <h3 class="eyebrow">Models in the fleet</h3>
+    <h3 class="eyebrow">{aiSection.modelsLabel}</h3>
     <div class="mt-4 flex flex-wrap gap-2.5">
       {
         aiSection.models.map(m => (
@@ -90,8 +90,10 @@ const rankStyles = {
   <!-- 3. Capability ladder — rarest first -->
   <div class="mt-12">
     <div class="flex items-end justify-between gap-4">
-      <h3 class="text-lg font-semibold tracking-tight">Capability ladder</h3>
-      <span class="text-sub text-xs font-medium">rarer / harder ↑</span>
+      <h3 class="text-lg font-semibold tracking-tight">
+        {aiSection.ladderLabel}
+      </h3>
+      <span class="text-sub text-xs font-medium">{aiSection.rarerLabel}</span>
     </div>
 
     <div class="mt-6 space-y-5">

@@ -1,16 +1,11 @@
 ---
-import {freelanceProjects} from "../../data/portfolio";
+import {getContent} from "../../data/portfolio";
 
+const t = getContent(Astro.currentLocale).projects;
 const base = import.meta.env.BASE_URL;
 
-// Soften the all-caps subtitle into sentence case for a calmer look.
-const softSubtitle = freelanceProjects.subtitle
-  ? freelanceProjects.subtitle.charAt(0).toUpperCase() +
-    freelanceProjects.subtitle.slice(1).toLowerCase()
-  : "";
-
 // Parse "Role:" / "Tech:" bullet lines into tags, keep the rest as prose.
-const cards = freelanceProjects.projects.map(project => {
+const cards = t.items.map(project => {
   const bullets = project.descBullets ?? [];
   let role = "";
   let tech: string[] = [];
@@ -37,11 +32,12 @@ const cards = freelanceProjects.projects.map(project => {
 
 <section id="projects" class="section reveal">
   <div class="max-w-2xl mb-12">
-    <span class="eyebrow mb-3">{freelanceProjects.title}</span>
+    <span class="eyebrow mb-3">{t.eyebrow}</span>
     <h2 class="text-3xl md:text-4xl font-bold tracking-tight mt-3 mb-3">
-      Selected <span class="gradient-text">projects</span>
+      {t.headingPre}
+      <span class="gradient-text">{t.headingEm}</span>
     </h2>
-    <p class="text-sub text-base md:text-lg">{softSubtitle}</p>
+    <p class="text-sub text-base md:text-lg">{t.subtitle}</p>
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-7">

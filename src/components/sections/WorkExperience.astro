@@ -1,18 +1,20 @@
 ---
-import {workExperiences} from "../../data/portfolio";
+import {getContent} from "../../data/portfolio";
 
+const t = getContent(Astro.currentLocale).experience;
 const base = import.meta.env.BASE_URL;
 ---
 
 <section id="experience" class="section reveal">
   <!-- Heading block -->
   <div class="max-w-2xl">
-    <span class="eyebrow">Experience</span>
+    <span class="eyebrow">{t.eyebrow}</span>
     <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
-      Work <span class="gradient-text">experience</span>
+      {t.headingPre}
+      <span class="gradient-text">{t.headingEm}</span>
     </h2>
     <p class="text-sub mt-4 text-base leading-relaxed">
-      Roles where I owned features end-to-end and led when it mattered.
+      {t.sub}
     </p>
   </div>
 
@@ -26,7 +28,7 @@ const base = import.meta.env.BASE_URL;
 
     <ol class="space-y-8">
       {
-        workExperiences.map(exp => (
+        t.items.map(exp => (
           <li class="relative pl-10 sm:pl-12 reveal-right">
             {/* node dot */}
             <span

@@ -1,5 +1,7 @@
 ---
-import {greeting, socialMediaLinks} from "../data/portfolio";
+import {getContent, socialMediaLinks, heroChips} from "../data/portfolio";
+
+const t = getContent(Astro.currentLocale).hero;
 
 const socials = [
   {
@@ -28,16 +30,6 @@ const socials = [
     icon: "M22 4H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm-.4 4.25-8.53 5.33a2 2 0 0 1-2.14 0L2.4 8.25a.75.75 0 1 1 .8-1.27L12 12.02l8.8-5.04a.75.75 0 1 1 .8 1.27Z"
   }
 ];
-
-const chips = [
-  "React",
-  "React Native",
-  "Node.js",
-  "TypeScript",
-  "Go",
-  "Next.js"
-];
-const stats = ["5+ yrs experience", "End-to-end delivery", "Interim tech lead"];
 ---
 
 <section id="home" class="relative overflow-hidden">
@@ -73,27 +65,28 @@ const stats = ["5+ yrs experience", "End-to-end delivery", "Interim tech lead"];
               class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"
             ></span>
           </span>
-          AI-focused Full Stack Developer · Thailand
+          {t.badge}
         </span>
 
         <h1
           class="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl"
         >
-          Hey there! I'm <span class="gradient-text">James</span>.
+          {t.greetingPre}
+          <span class="gradient-text">{t.greetingName}</span>{t.greetingPost}
         </h1>
 
         <p class="text-sub mt-6 max-w-xl leading-relaxed">
-          {greeting.subTitle}
+          {t.subTitle}
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a
-            href={greeting.resumeLink}
+            href={t.resumeLink}
             target="_blank"
             rel="noopener noreferrer"
             class="btn-gradient"
           >
-            View Résumé
+            {t.resumeBtn}
           </a>
           <a
             href={socialMediaLinks.github}
@@ -101,9 +94,9 @@ const stats = ["5+ yrs experience", "End-to-end delivery", "Interim tech lead"];
             rel="noopener noreferrer"
             class="btn-ghost"
           >
-            View GitHub
+            {t.githubBtn}
           </a>
-          <a href="#contact" class="btn-ghost">Contact</a>
+          <a href="#contact" class="btn-ghost">{t.contactBtn}</a>
         </div>
 
         <!-- Social icons -->
@@ -145,13 +138,13 @@ const stats = ["5+ yrs experience", "End-to-end delivery", "Interim tech lead"];
               <p class="font-mono text-lg font-semibold">
                 &lt; ChaichanaS /&gt;
               </p>
-              <p class="text-sub text-sm">Full Stack Developer · Thailand</p>
+              <p class="text-sub text-sm">{t.cardRole}</p>
             </div>
           </div>
 
           <!-- Skill chips -->
           <div class="mt-6 flex flex-wrap gap-2">
-            {chips.map(c => <span class="pill">{c}</span>)}
+            {heroChips.map(c => <span class="pill">{c}</span>)}
           </div>
 
           <!-- Stat lines -->
@@ -159,7 +152,7 @@ const stats = ["5+ yrs experience", "End-to-end delivery", "Interim tech lead"];
             class="mt-6 space-y-2.5 border-t border-slate-200/60 pt-5 dark:border-white/10"
           >
             {
-              stats.map(stat => (
+              t.stats.map(stat => (
                 <div class="flex items-center gap-2.5 text-sm">
                   <span class="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-sky-400 to-violet-400" />
                   <span class="font-medium">{stat}</span>

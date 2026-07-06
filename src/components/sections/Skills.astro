@@ -1,16 +1,19 @@
 ---
-import {skillsSection} from "../../data/portfolio";
+import {getContent, softwareSkills} from "../../data/portfolio";
+
+const t = getContent(Astro.currentLocale).skills;
 ---
 
 <section id="skills" class="section reveal">
   <!-- Heading block -->
   <div class="max-w-2xl">
-    <span class="eyebrow">{skillsSection.title}</span>
+    <span class="eyebrow">{t.eyebrow}</span>
     <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
-      Skills &amp; <span class="gradient-text">capabilities</span>
+      {t.headingPre}
+      <span class="gradient-text">{t.headingEm}</span>
     </h2>
     <p class="text-sub mt-4 text-base leading-relaxed">
-      Middle-to-senior full stack developer — web, mobile, and backend.
+      {t.subTitle}
     </p>
   </div>
 
@@ -18,37 +21,33 @@ import {skillsSection} from "../../data/portfolio";
   <div class="mt-12 grid gap-6 lg:grid-cols-2">
     <!-- 1. What I do — bullet list -->
     <div class="glass reveal-left p-8 sm:p-10">
-      <h3 class="text-lg font-semibold tracking-tight">What I bring</h3>
+      <h3 class="text-lg font-semibold tracking-tight">{t.whatIBring}</h3>
       <ul class="mt-6 space-y-5">
         {
-          skillsSection.skills.map(skill => {
-            const emoji = skill.trim().slice(0, skill.trim().indexOf(" "));
-            const text = skill.trim().slice(skill.trim().indexOf(" ") + 1);
-            return (
-              <li class="flex items-start gap-4">
-                <span
-                  class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm"
-                  style="background: rgba(139,92,246,0.10); border:1px solid rgba(148,163,184,0.25);"
-                  aria-hidden="true"
-                >
-                  {emoji}
-                </span>
-                <span class="text-sub text-[0.95rem] leading-relaxed pt-1">
-                  {text}
-                </span>
-              </li>
-            );
-          })
+          t.items.map(text => (
+            <li class="flex items-start gap-4">
+              <span
+                class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm"
+                style="background: rgba(139,92,246,0.10); border:1px solid rgba(148,163,184,0.25);"
+                aria-hidden="true"
+              >
+                ⚡
+              </span>
+              <span class="text-sub text-[0.95rem] leading-relaxed pt-1">
+                {text}
+              </span>
+            </li>
+          ))
         }
       </ul>
     </div>
 
     <!-- 2. Tech-stack cloud -->
     <div class="glass reveal-right p-8 sm:p-10">
-      <h3 class="text-lg font-semibold tracking-tight">Tech I reach for</h3>
+      <h3 class="text-lg font-semibold tracking-tight">{t.techIReach}</h3>
       <div class="mt-6 flex flex-wrap gap-2.5">
         {
-          skillsSection.softwareSkills.map(s => (
+          softwareSkills.map(s => (
             <span class="pill">
               <i class={s.iconClass} aria-hidden="true" />
               <span>{s.skillName}</span>
