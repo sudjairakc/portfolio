@@ -1,46 +1,75 @@
 ---
-import {contactInfo} from "../../data/portfolio";
-import SocialMedia from "../SocialMedia.astro";
-import LottiePlayer from "../LottiePlayer.astro";
+import {contactInfo, socialMediaLinks} from "../../data/portfolio";
 ---
 
-<section id="contact" class="section" style="background: var(--bg-secondary);">
-  <div class="flex flex-col md:flex-row items-center gap-12 max-w-4xl mx-auto">
-    <div class="flex-1 reveal">
-      <h2 class="gradient-heading text-3xl md:text-4xl font-bold mb-4">
-        {contactInfo.title}
+<section id="contact" class="section reveal">
+  <div class="relative isolate mx-auto max-w-3xl">
+    <!-- Layered background glow -->
+    <div
+      class="pointer-events-none absolute -inset-10 -z-10 overflow-visible"
+      aria-hidden="true"
+    >
+      <div
+        class="blob absolute left-1/4 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-sky-400/30 blur-3xl"
+      >
+      </div>
+      <div
+        class="blob absolute left-1/2 top-10 h-72 w-72 -translate-x-1/2 rounded-full bg-violet-500/30 blur-3xl"
+        style="animation-delay:-5s"
+      >
+      </div>
+      <div
+        class="blob absolute right-1/4 bottom-0 h-64 w-64 translate-x-1/2 rounded-full bg-fuchsia-400/30 blur-3xl"
+        style="animation-delay:-9s"
+      >
+      </div>
+    </div>
+
+    <div
+      class="glass flex flex-col items-center text-center px-6 py-14 md:px-14 md:py-20"
+    >
+      <span class="eyebrow mb-4">Get in touch</span>
+      <h2
+        class="text-3xl md:text-5xl font-bold tracking-tight mb-5 leading-tight"
+      >
+        Have an idea worth <span class="gradient-text">building?</span>
       </h2>
-      <p class="text-lg mb-6" style="color: var(--text-sub);">
+      <p class="text-sub text-base md:text-lg max-w-xl mb-8">
         {contactInfo.subtitle}
       </p>
 
-      <div class="flex flex-col gap-2 mb-6">
-        <a
-          href={`mailto:${contactInfo.email}`}
-          class="text-xl font-semibold text-primary hover:text-primary-hover transition-colors"
-        >
-          {contactInfo.email}
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+        <a href={`mailto:${contactInfo.email}`} class="btn-gradient">
+          Email Me
         </a>
-        {
-          contactInfo.phone && (
-            <a
-              href={`tel:${contactInfo.phone}`}
-              class="text-lg font-medium hover:text-primary transition-colors"
-              style="color: var(--text-sub);"
-            >
-              {contactInfo.phone}
-            </a>
-          )
-        }
+        <a
+          href={socialMediaLinks.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-ghost"
+        >
+          GitHub
+        </a>
+        <a
+          href={socialMediaLinks.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-ghost"
+        >
+          LinkedIn
+        </a>
       </div>
 
-      <SocialMedia />
-    </div>
-
-    <div class="flex-1 flex justify-center reveal-right">
-      <div data-parallax data-parallax-speed="50" class="w-full max-w-xs">
-        <LottiePlayer src="lottie/email.json" class="w-full" />
-      </div>
+      {
+        contactInfo.phone && (
+          <a
+            href={`tel:${contactInfo.phone.replace(/[^0-9+]/g, "")}`}
+            class="pill"
+          >
+            {contactInfo.phone}
+          </a>
+        )
+      }
     </div>
   </div>
 </section>

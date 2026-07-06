@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 interface Props {
   title?: string;
   description?: string;
@@ -6,10 +8,13 @@ interface Props {
 
 const {
   title = "Chaichana Sudjairak | Full Stack Developer",
-  description = "Full Stack Software Developer from Thailand specialising in React, Node.js, and React Native."
+  description = "AI-focused Full Stack Developer from Thailand specialising in React, React Native, Node.js, Go, and TypeScript — building web, mobile, and real-time products end-to-end."
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
+const canonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).href
+  : Astro.url.href;
 ---
 
 <!doctype html>
@@ -17,12 +22,32 @@ const base = import.meta.env.BASE_URL;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href={`${base}/favicon.png`} />
-    <link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
+    <link rel="icon" type="image/png" href={`${base}favicon.png`} />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+
+    <!-- Fonts: Inter (English) + Noto Sans Thai (Thai) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font Awesome (UI icons) -->
     <link
@@ -53,23 +78,32 @@ const base = import.meta.env.BASE_URL;
   <body>
     <slot />
 
-    <!-- Scroll-reveal observer -->
-    <script>
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {threshold: 0.1}
-      );
-
-      document
-        .querySelectorAll(".reveal, .reveal-left, .reveal-right")
-        .forEach(el => observer.observe(el));
+    <!-- Scroll-reveal observer: adds `.is-visible` as elements enter view. -->
+    <script is:inline>
+      (() => {
+        const reduce = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+        const els = document.querySelectorAll(
+          ".reveal, .reveal-left, .reveal-right"
+        );
+        if (reduce || !("IntersectionObserver" in window)) {
+          els.forEach((el) => el.classList.add("is-visible"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        );
+        els.forEach((el) => io.observe(el));
+      })();
     </script>
   </body>
 </html>

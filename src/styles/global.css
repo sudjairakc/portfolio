@@ -1,357 +1,307 @@
 @import "tailwindcss";
 
-/* Dark mode via .dark class on <html> */
+/* Dark mode driven by a `.dark` class on <html> (toggled + persisted as "isDark"). */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ── Design tokens ─────────────────────────────────────────────────────────── */
 @theme {
-  --color-primary: #ec4f9e;
-  --color-primary-hover: #ff8eec;
-  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-sans:
+    "Inter", "Manrope", "SF Pro Display", "Noto Sans Thai", "LINE Seed Sans TH",
+    system-ui, -apple-system, sans-serif;
+
+  /* AI glow palette */
+  --color-glow-blue: #93c5fd;
+  --color-glow-violet: #d8b4fe;
+  --color-glow-cyan: #67e8f9;
+  --color-glow-mint: #a7f3d0;
 }
 
-/* ── Semantic CSS custom properties ────────────────────────────────────────── */
-:root {
-  --bg: #ffffff;
-  --bg-secondary: #f5f2f4;
-  --text: #000000;
-  --text-sub: #868e96;
-  --card-bg: #ffffff;
-  --card-border: rgba(0, 0, 0, 0.08);
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.14);
-  --nav-bg: rgba(255, 255, 255, 0.85);
-}
-
-html.dark {
-  --bg: #171c28;
-  --bg-secondary: #1c2135;
-  --text: #ffffff;
-  --text-sub: #9aa3b2;
-  --card-bg: #1e2437;
-  --card-border: rgba(255, 255, 255, 0.08);
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.6);
-  --nav-bg: rgba(23, 28, 40, 0.9);
-}
-
-/* ── Base ───────────────────────────────────────────────────────────────────── */
+/* ── Base page ─────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
-  /* Apple-style snap: each full-screen section eases into place.
-     `proximity` (not `mandatory`) so tall sections never trap the scroll. */
-  scroll-snap-type: y proximity;
-  scroll-padding-top: 4rem; /* clears the fixed h-16 header */
+  scroll-padding-top: 6rem; /* clears the sticky glass navbar */
 }
 
-/* Don't snap-trap on touch devices where it can feel sticky */
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-snap-type: none;
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  min-height: 100vh;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(147, 197, 253, 0.3), transparent 32%),
+    radial-gradient(circle at 80% 10%, rgba(216, 180, 254, 0.28), transparent 30%),
+    radial-gradient(circle at 50% 90%, rgba(167, 243, 208, 0.24), transparent 34%),
+    #f8fafc;
+  background-attachment: fixed;
 }
 
-/* ── Scroll-reveal animation ────────────────────────────────────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+html.dark body {
+  color: #f8fafc;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.2), transparent 32%),
+    radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.2), transparent 30%),
+    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.14), transparent 34%),
+    #020617;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+::selection {
+  background: rgba(147, 197, 253, 0.5);
 }
 
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-24px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+/* ── Reusable component classes ────────────────────────────────────────────── */
+@layer components {
+  /* Frosted glass surface — the core visual primitive. */
+  .glass {
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.58);
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.1);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+  }
+  html.dark .glass {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.58);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Small pill / chip used for skills, tags, secondary nav. */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #334155;
+    backdrop-filter: blur(12px);
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .pill:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+  }
+  html.dark .pill {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: #cbd5e1;
+  }
+  html.dark .pill:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Gradient text for emphasis words. */
+  .gradient-text {
+    background-image: linear-gradient(to right, #0ea5e9, #8b5cf6, #d946ef);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Eyebrow label above headlines. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+  html.dark .eyebrow {
+    color: #94a3b8;
+  }
+
+  /* Primary CTA. */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background: #0f172a;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.28);
+  }
+  html.dark .btn-primary {
+    background: #f8fafc;
+    color: #0f172a;
+  }
+
+  /* Gradient CTA. */
+  .btn-gradient {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background: linear-gradient(to right, #0ea5e9, #8b5cf6);
+    padding: 0.85rem 1.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(139, 92, 246, 0.35);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 46px rgba(139, 92, 246, 0.45);
+  }
+
+  /* Secondary / ghost button. */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background: rgba(255, 255, 255, 0.4);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #334155;
+    backdrop-filter: blur(12px);
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+  .btn-ghost:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.75);
+  }
+  html.dark .btn-ghost {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+  }
+  html.dark .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Section shell — consistent vertical rhythm + centered container. */
+  .section {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    padding-block: 4.5rem;
+  }
+  @media (min-width: 640px) {
+    .section {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .section {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Muted secondary text helper. */
+  .text-sub {
+    color: #64748b;
+  }
+  html.dark .text-sub {
+    color: #94a3b8;
+  }
 }
 
-.reveal-left.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
+/* ── Scroll reveal (driven by IntersectionObserver in Layout) ──────────────── */
+.reveal,
+.reveal-left,
 .reveal-right {
   opacity: 0;
-  transform: translateX(24px);
   transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
-
-.reveal-right.visible {
+.reveal {
+  transform: translateY(24px);
+}
+.reveal-left {
+  transform: translateX(-28px);
+}
+.reveal-right {
+  transform: translateX(28px);
+}
+.reveal.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: none;
 }
-
-/* ── SplashScreen ────────────────────────────────────────────────────────────── */
-#splash-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background-color: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.5s ease;
-}
-
-#splash-screen.hide {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* ── Full-screen snap sections ──────────────────────────────────────────────── */
-/* Each section fills the viewport and centres its content. min-height (not
-   fixed height) lets sections taller than the screen grow naturally. */
-.section {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 5rem 1.5rem;
-  scroll-snap-align: start;
-}
-
-/* Constrain the readable content width inside a full-bleed section. */
-.section-inner {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* The hero is its own full-screen block — let it snap too. */
-[data-hero] {
-  scroll-snap-align: start;
-}
-
-/* ── Scroll-driven effects ──────────────────────────────────────────────────── */
-/* Top scroll-progress bar (Apple-style). scaleX is driven by Motion. */
-#scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  z-index: 60;
-  transform-origin: 0 50%;
-  transform: scaleX(0);
-  background: linear-gradient(
-    90deg,
-    var(--color-primary),
-    var(--color-primary-hover)
-  );
-}
-
-/* Elements driven by Motion (parallax / scrub) must NOT have a CSS transition
-   on transform, or it fights the per-frame style updates. */
-[data-parallax],
-[data-hero-content] {
-  will-change: transform;
-}
-
-/* ── Apple-style hero ───────────────────────────────────────────────────────── */
-.hero-kicker {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-primary);
-}
-
-.hero-title {
-  background: linear-gradient(
-    120deg,
-    var(--text) 0%,
-    var(--color-primary) 45%,
-    var(--color-primary-hover) 70%,
-    var(--text) 100%
-  );
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: -0.02em;
-  animation: hero-gradient 9s ease-in-out infinite;
-}
-
-@keyframes hero-gradient {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* Gradient accent for section headings — readable text that fades into the
-   brand colour. Apply with class `gradient-heading`. */
-.gradient-heading {
-  background: linear-gradient(
-    90deg,
-    var(--text) 35%,
-    var(--color-primary) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  width: fit-content;
-}
-
-.gradient-heading.mx-auto,
-.text-center .gradient-heading,
-.gradient-heading.text-center {
-  margin-inline: auto;
-}
-
-/* ── Ambient colour blobs (soft, blurred, drifting) ─────────────────────────── */
-.blob {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(70px);
-  opacity: 0.35;
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-}
-
-.blob-1 {
-  width: 22rem;
-  height: 22rem;
-  background: var(--color-primary);
-  top: 8%;
-  left: -4rem;
-  animation: blob-float-a 14s ease-in-out infinite;
-}
-
-.blob-2 {
-  width: 26rem;
-  height: 26rem;
-  background: var(--color-primary-hover);
-  bottom: 6%;
-  right: -5rem;
-  animation: blob-float-b 18s ease-in-out infinite;
-}
-
-@keyframes blob-float-a {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(2rem, 1.5rem) scale(1.1);
-  }
-}
-
-@keyframes blob-float-b {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-2.5rem, -1rem) scale(0.92);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hero-title {
-    animation: none;
-  }
-  .blob {
-    animation: none;
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
-/* Bouncing scroll-down cue */
-.scroll-cue {
-  animation: scroll-bob 2s ease-in-out infinite;
+/* ── Slow drifting background blobs ────────────────────────────────────────── */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(24px, -18px) scale(1.08);
+  }
+}
+.blob {
+  animation: drift 16s ease-in-out infinite;
 }
 
-@keyframes scroll-bob {
+/* ── Gentle float for cards ────────────────────────────────────────────────── */
+@keyframes float {
   0%,
   100% {
     transform: translateY(0);
-    opacity: 0.6;
   }
   50% {
-    transform: translateY(8px);
-    opacity: 1;
+    transform: translateY(-10px);
   }
 }
+.float-slow {
+  animation: float 7s ease-in-out infinite;
+}
+.float-slower {
+  animation: float 9s ease-in-out infinite;
+}
 
-/* Honour reduced-motion: disable scroll-bob; scrub/parallax are skipped in JS */
 @media (prefers-reduced-motion: reduce) {
-  .scroll-cue {
+  .blob,
+  .float-slow,
+  .float-slower {
     animation: none;
-  }
-}
-
-/* ── Skill icon tooltip ─────────────────────────────────────────────────────── */
-.skill-icon {
-  position: relative;
-  cursor: default;
-}
-
-.skill-icon .tooltip {
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: #fff;
-  font-size: 0.7rem;
-  padding: 2px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-}
-
-.skill-icon:hover .tooltip {
-  opacity: 1;
-}
-
-/* ── Wave emoji ─────────────────────────────────────────────────────────────── */
-.wave {
-  display: inline-block;
-  animation: wave 2.5s infinite;
-  transform-origin: 70% 70%;
-}
-
-@keyframes wave {
-  0%,
-  60%,
-  100% {
-    transform: rotate(0deg);
-  }
-  10%,
-  30% {
-    transform: rotate(14deg);
-  }
-  20% {
-    transform: rotate(-8deg);
-  }
-  40% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(10deg);
   }
 }

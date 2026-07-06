@@ -2,62 +2,92 @@
 import {freelanceProjects} from "../../data/portfolio";
 
 const base = import.meta.env.BASE_URL;
+
+// Soften the all-caps subtitle into sentence case for a calmer look.
+const softSubtitle = freelanceProjects.subtitle
+  ? freelanceProjects.subtitle.charAt(0).toUpperCase() +
+    freelanceProjects.subtitle.slice(1).toLowerCase()
+  : "";
+
+// Parse "Role:" / "Tech:" bullet lines into tags, keep the rest as prose.
+const cards = freelanceProjects.projects.map(project => {
+  const bullets = project.descBullets ?? [];
+  let role = "";
+  let tech: string[] = [];
+  const desc: string[] = [];
+
+  for (const bullet of bullets) {
+    const roleMatch = bullet.match(/^\s*Role:\s*(.+)$/i);
+    const techMatch = bullet.match(/^\s*Tech:\s*(.+)$/i);
+    if (roleMatch) {
+      role = roleMatch[1].trim();
+    } else if (techMatch) {
+      tech = techMatch[1]
+        .split(",")
+        .map(t => t.trim())
+        .filter(Boolean);
+    } else {
+      desc.push(bullet);
+    }
+  }
+
+  return {...project, role, tech, desc};
+});
 ---
 
-<section id="projects" class="section">
-  <div class="section-inner">
-    <h2
-      class="gradient-heading text-3xl md:text-4xl font-bold mb-2 text-center reveal"
-    >
-      {freelanceProjects.title}
+<section id="projects" class="section reveal">
+  <div class="max-w-2xl mb-12">
+    <span class="eyebrow mb-3">{freelanceProjects.title}</span>
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mt-3 mb-3">
+      Selected <span class="gradient-text">projects</span>
     </h2>
-    <p
-      class="text-center text-sm font-semibold uppercase tracking-wider mb-10 reveal"
-      style="color: var(--text-sub);"
-    >
-      {freelanceProjects.subtitle}
-    </p>
+    <p class="text-sub text-base md:text-lg">{softSubtitle}</p>
+  </div>
 
-    <div data-stagger class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {
-        freelanceProjects.projects.map(project => (
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-7">
+    {
+      cards.map((project, i) => (
+        <article
+          class="group reveal relative flex flex-col p-6 md:p-7 glass transition-all duration-500 hover:-translate-y-1.5"
+          style={`transition-delay:${i * 90}ms`}
+        >
           <div
-            class="reveal flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-            style="background: var(--card-bg); box-shadow: var(--shadow); border: 1px solid var(--card-border);"
-          >
-            {project.image && (
-              <div class="flex justify-center pt-6 pb-2 px-6">
-                <img
-                  src={`${base}/images/${project.image}`}
-                  alt={project.projectName}
-                  data-motion-zoom
-                  class="w-20 h-20 rounded-xl object-contain bg-white p-2 shadow-sm"
-                  loading="lazy"
-                />
-              </div>
-            )}
+            class="pointer-events-none absolute -inset-px -z-10 rounded-[2rem] bg-gradient-to-br from-sky-400/0 via-violet-400/0 to-fuchsia-400/0 opacity-0 blur-2xl transition-opacity duration-500 group-hover:from-sky-400/25 group-hover:via-violet-400/20 group-hover:to-fuchsia-400/25 group-hover:opacity-100"
+            aria-hidden="true"
+          />
 
-            <div class="flex flex-col flex-1 p-6 pt-3">
-              <h3 class="font-bold text-base mb-3 leading-snug">
-                {project.projectName}
-              </h3>
-              {project.descBullets && (
-                <ul class="space-y-1.5 mt-auto">
-                  {project.descBullets.map(bullet => (
-                    <li
-                      class="flex items-start gap-2 text-sm"
-                      style="color: var(--text-sub);"
-                    >
-                      <span class="mt-0.5 text-primary shrink-0">▸</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
+          {project.image && (
+            <div class="mb-5 w-16 h-16 rounded-2xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-900/5 flex items-center justify-center">
+              <img
+                src={`${base}images/${project.image}`}
+                alt={project.projectName}
+                class="w-full h-full object-contain p-2.5"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-          </div>
-        ))
-      }
-    </div>
+          )}
+
+          <h3 class="font-semibold text-lg leading-snug mb-3">
+            {project.projectName}
+          </h3>
+
+          {(project.role || project.tech.length > 0) && (
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.role && <span class="pill">{project.role}</span>}
+              {project.tech.map(t => (
+                <span class="pill">{t}</span>
+              ))}
+            </div>
+          )}
+
+          {project.desc.length > 0 && (
+            <p class="text-sub text-sm leading-relaxed mt-auto">
+              {project.desc.join(" ")}
+            </p>
+          )}
+        </article>
+      ))
+    }
   </div>
 </section>
