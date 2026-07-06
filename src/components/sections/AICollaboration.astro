@@ -1,0 +1,161 @@
+---
+import {aiSection} from "../../data/portfolio";
+
+// Per-rank visual treatment. specialist = strongest emphasis (glow ring),
+// advanced = medium, baseline = subtle.
+const rankStyles = {
+  specialist: {
+    dot: "linear-gradient(135deg, #d946ef, #8b5cf6)",
+    badge: "background:linear-gradient(135deg,#8b5cf6,#d946ef);color:#fff;",
+    accent: "#c084fc"
+  },
+  advanced: {
+    dot: "linear-gradient(135deg, #8b5cf6, #0ea5e9)",
+    badge:
+      "background:rgba(139,92,246,0.12);color:#7c3aed;border:1px solid rgba(139,92,246,0.35);",
+    accent: "#8b5cf6"
+  },
+  baseline: {
+    dot: "linear-gradient(135deg, #0ea5e9, #22d3ee)",
+    badge:
+      "background:rgba(14,165,233,0.10);color:#0284c7;border:1px solid rgba(14,165,233,0.3);",
+    accent: "#0ea5e9"
+  }
+} as const;
+---
+
+<section id="ai" class="section reveal">
+  <!-- Heading block -->
+  <div class="max-w-3xl">
+    <span class="eyebrow">
+      <span
+        class="inline-block h-1.5 w-1.5 rounded-full"
+        style="background:linear-gradient(135deg,#0ea5e9,#d946ef);box-shadow:0 0 10px rgba(217,70,239,0.7);"
+        aria-hidden="true"></span>
+      {aiSection.eyebrow}
+    </span>
+    <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
+      {aiSection.title.split(" ")[0]}{" "}
+      <span class="gradient-text">{aiSection.title.split(" ").slice(1).join(" ")}</span>
+    </h2>
+    <p class="mt-4 text-lg font-semibold sm:text-xl">{aiSection.headline}</p>
+    <p class="text-sub mt-3 text-base leading-relaxed">{aiSection.intro}</p>
+  </div>
+
+  <!-- 1. Proof-strip stats -->
+  <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+    {
+      aiSection.stats.map(s => (
+        <div class="glass reveal p-5 text-center transition duration-300 hover:-translate-y-1">
+          <div class="text-2xl font-bold tracking-tight sm:text-[1.65rem]">
+            <span class="gradient-text">{s.value}</span>
+          </div>
+          <div class="text-sub mt-1.5 text-xs leading-snug">{s.label}</div>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- 2. Model lineup -->
+  <div class="mt-8">
+    <h3 class="eyebrow">Models in the fleet</h3>
+    <div class="mt-4 flex flex-wrap gap-2.5">
+      {
+        aiSection.models.map(m => (
+          <span
+            class="pill"
+            style={
+              m.autonomous
+                ? "border-color:rgba(217,70,239,0.45);background:rgba(217,70,239,0.08);"
+                : undefined
+            }
+          >
+            {m.autonomous && (
+              <span
+                class="inline-block h-1.5 w-1.5 rounded-full"
+                style="background:#d946ef;box-shadow:0 0 8px rgba(217,70,239,0.8);"
+                aria-hidden="true"
+              />
+            )}
+            <span class="font-semibold">{m.name}</span>
+            <span class="text-sub text-[0.7rem]">· {m.vendor}</span>
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- 3. Capability ladder — rarest first -->
+  <div class="mt-12">
+    <div class="flex items-end justify-between gap-4">
+      <h3 class="text-lg font-semibold tracking-tight">Capability ladder</h3>
+      <span class="text-sub text-xs font-medium">rarer / harder ↑</span>
+    </div>
+
+    <div class="mt-6 space-y-5">
+      {
+        aiSection.tiers.map(tier => {
+          const rs = rankStyles[tier.rank as keyof typeof rankStyles];
+          const isPeak = tier.rank === "specialist";
+          return (
+            <article
+              class="glass reveal-left relative overflow-hidden p-6 sm:p-8"
+              style={
+                isPeak
+                  ? "border-color:rgba(192,132,252,0.55);box-shadow:0 24px 80px rgba(139,92,246,0.22);"
+                  : undefined
+              }
+            >
+              {/* left accent rail */}
+              <span
+                class="pointer-events-none absolute inset-y-0 left-0 w-1"
+                style={`background:${rs.dot};`}
+                aria-hidden="true"
+              />
+              {isPeak && (
+                <span
+                  class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl"
+                  style="background:radial-gradient(circle,rgba(217,70,239,0.28),transparent 70%);"
+                  aria-hidden="true"
+                />
+              )}
+
+              {/* tier header */}
+              <div class="flex flex-wrap items-center gap-3">
+                <span
+                  class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-wide"
+                  style={rs.badge}
+                >
+                  {tier.tag}
+                </span>
+                <span class="text-sub text-xs font-medium">{tier.note}</span>
+              </div>
+              <p class="mt-3 text-[0.95rem] font-semibold">{tier.title}</p>
+
+              {/* capability grid */}
+              <div class="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+                {tier.items.map(item => (
+                  <div class="flex items-start gap-3">
+                    <span
+                      class="mt-1.5 h-2 w-2 shrink-0 rounded-full"
+                      style={`background:${rs.dot};`}
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <div class="text-[0.9rem] font-semibold leading-snug">
+                        {item.name}
+                      </div>
+                      <div class="text-sub mt-1 text-[0.82rem] leading-relaxed">
+                        {item.desc}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
