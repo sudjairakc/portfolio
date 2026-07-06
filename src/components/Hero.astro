@@ -1,5 +1,5 @@
 ---
-import { greeting, socialMediaLinks } from "../data/portfolio";
+import {greeting, socialMediaLinks} from "../data/portfolio";
 
 const socials = [
   {
@@ -29,13 +29,23 @@ const socials = [
   }
 ];
 
-const chips = ["React", "React Native", "Node.js", "TypeScript", "Go", "Next.js"];
+const chips = [
+  "React",
+  "React Native",
+  "Node.js",
+  "TypeScript",
+  "Go",
+  "Next.js"
+];
 const stats = ["5+ yrs experience", "End-to-end delivery", "Interim tech lead"];
 ---
 
 <section id="home" class="relative overflow-hidden">
   <!-- Drifting AI-orb blobs -->
-  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+  >
     <div
       class="blob float-slower absolute -top-24 -left-16 h-80 w-80 rounded-full bg-sky-400/25 blur-3xl dark:bg-sky-500/20"
     >
@@ -59,12 +69,16 @@ const stats = ["5+ yrs experience", "End-to-end delivery", "Interim tech lead"];
             <span
               class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"
             ></span>
-            <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+            <span
+              class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"
+            ></span>
           </span>
           AI-focused Full Stack Developer · Thailand
         </span>
 
-        <h1 class="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
+        <h1
+          class="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl"
+        >
           Hey there! I'm <span class="gradient-text">James</span>.
         </h1>
 
@@ -95,7 +109,7 @@ const stats = ["5+ yrs experience", "End-to-end delivery", "Interim tech lead"];
         <!-- Social icons -->
         <div class="mt-8 flex flex-wrap items-center gap-3">
           {
-            socials.map((s) => (
+            socials.map(s => (
               <a
                 href={s.href}
                 target="_blank"
@@ -128,20 +142,24 @@ const stats = ["5+ yrs experience", "End-to-end delivery", "Interim tech lead"];
               &lt;/&gt;
             </div>
             <div>
-              <p class="font-mono text-lg font-semibold">&lt; ChaichanaS /&gt;</p>
+              <p class="font-mono text-lg font-semibold">
+                &lt; ChaichanaS /&gt;
+              </p>
               <p class="text-sub text-sm">Full Stack Developer · Thailand</p>
             </div>
           </div>
 
           <!-- Skill chips -->
           <div class="mt-6 flex flex-wrap gap-2">
-            {chips.map((c) => <span class="pill">{c}</span>)}
+            {chips.map(c => <span class="pill">{c}</span>)}
           </div>
 
           <!-- Stat lines -->
-          <div class="mt-6 space-y-2.5 border-t border-slate-200/60 pt-5 dark:border-white/10">
+          <div
+            class="mt-6 space-y-2.5 border-t border-slate-200/60 pt-5 dark:border-white/10"
+          >
             {
-              stats.map((stat) => (
+              stats.map(stat => (
                 <div class="flex items-center gap-2.5 text-sm">
                   <span class="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-sky-400 to-violet-400" />
                   <span class="font-medium">{stat}</span>

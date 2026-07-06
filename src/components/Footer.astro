@@ -50,7 +50,9 @@ const socials = [
             href={s.href}
             aria-label={s.label}
             target={s.href.startsWith("mailto:") ? undefined : "_blank"}
-            rel={s.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+            rel={
+              s.href.startsWith("mailto:") ? undefined : "noopener noreferrer"
+            }
             class="text-slate-400 hover:text-slate-900 dark:text-slate-500 dark:hover:text-white transition-colors p-2"
           >
             <svg
