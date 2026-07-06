@@ -9,6 +9,11 @@
     "Inter", "Manrope", "SF Pro Display", "Noto Sans Thai", "LINE Seed Sans TH",
     system-ui, -apple-system, sans-serif;
 
+  /* Smooth, springy defaults for every Tailwind `transition*` utility
+     project-wide (nav links, social icons, cards, etc). */
+  --default-transition-duration: 260ms;
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
   /* AI glow palette */
   --color-glow-blue: #93c5fd;
   --color-glow-violet: #d8b4fe;
@@ -87,6 +92,10 @@ html.dark body {
     box-shadow: 0 24px 80px rgba(15, 23, 42, 0.1);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
   html.dark .glass {
     border-color: rgba(255, 255, 255, 0.1);
@@ -108,9 +117,9 @@ html.dark body {
     color: #334155;
     backdrop-filter: blur(12px);
     transition:
-      transform 0.2s ease,
-      background 0.2s ease,
-      box-shadow 0.2s ease;
+      transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+      background 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.26s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .pill:hover {
     transform: translateY(-2px);
@@ -163,8 +172,8 @@ html.dark body {
     color: #fff;
     box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
     transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
+      transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.26s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .btn-primary:hover {
     transform: translateY(-2px);
@@ -189,8 +198,8 @@ html.dark body {
     color: #fff;
     box-shadow: 0 14px 34px rgba(139, 92, 246, 0.35);
     transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
+      transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.26s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .btn-gradient:hover {
     transform: translateY(-2px);
@@ -212,8 +221,8 @@ html.dark body {
     color: #334155;
     backdrop-filter: blur(12px);
     transition:
-      transform 0.2s ease,
-      background 0.2s ease;
+      transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+      background 0.26s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .btn-ghost:hover {
     transform: translateY(-2px);
