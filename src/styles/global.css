@@ -88,10 +88,8 @@ html.dark body {
   .glass {
     border-radius: 2rem;
     border: 1px solid rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.58);
+    background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 24px 80px rgba(15, 23, 42, 0.1);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
     transition:
       transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
@@ -99,7 +97,7 @@ html.dark body {
   }
   html.dark .glass {
     border-color: rgba(255, 255, 255, 0.1);
-    background: rgba(15, 23, 42, 0.58);
+    background: rgba(15, 23, 42, 0.85);
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
   }
 
@@ -110,12 +108,11 @@ html.dark body {
     gap: 0.4rem;
     border-radius: 9999px;
     border: 1px solid rgba(148, 163, 184, 0.35);
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.82);
     padding: 0.35rem 0.85rem;
     font-size: 0.8rem;
     font-weight: 500;
     color: #334155;
-    backdrop-filter: blur(12px);
     transition:
       transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
       background 0.26s cubic-bezier(0.22, 1, 0.36, 1),
@@ -214,12 +211,11 @@ html.dark body {
     gap: 0.5rem;
     border-radius: 9999px;
     border: 1px solid rgba(148, 163, 184, 0.5);
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.72);
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
     font-weight: 600;
     color: #334155;
-    backdrop-filter: blur(12px);
     transition:
       transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
       background 0.26s cubic-bezier(0.22, 1, 0.36, 1);
