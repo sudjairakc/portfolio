@@ -304,14 +304,17 @@ html.dark body {
 @keyframes drift {
   0%,
   100% {
-    transform: translate(0, 0) scale(1);
+    transform: translate(0, 0);
   }
   50% {
-    transform: translate(24px, -18px) scale(1.08);
+    transform: translate(24px, -18px);
   }
 }
 .blob {
   animation: drift 16s ease-in-out infinite;
+  will-change: transform;
+  /* smaller blur radius = far cheaper to rasterize (Tailwind v4 var override) */
+  --tw-blur: blur(40px);
 }
 
 /* ── Gentle float for cards ────────────────────────────────────────────────── */
