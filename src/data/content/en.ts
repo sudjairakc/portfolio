@@ -7,9 +7,9 @@ const years = getYear() - 2021;
 
 export const en: Content = {
   meta: {
-    title: "Chaichana Sudjairak | Full Stack Developer",
+    title: "Chaichana Sudjairak | Senior Full-Stack Developer",
     description:
-      "AI-focused Full Stack Developer from Thailand specialising in React, React Native, Node.js, Go, and TypeScript — building web, mobile, and real-time products end-to-end."
+      "AI-focused Senior Full-Stack Developer from Thailand specialising in React, React Native, Node.js, Go, and TypeScript — building web, mobile, and AI-assisted products end-to-end."
   },
 
   nav: {
@@ -23,24 +23,24 @@ export const en: Content = {
   },
 
   hero: {
-    badge: "AI-focused Full Stack Developer · Thailand",
+    badge: "Senior Full-Stack Developer · AI-focused · Thailand",
     greetingPre: "Hey there! I'm",
     greetingName: "James",
     greetingPost: ".",
-    subTitle: `Middle-to-Senior Full Stack Developer from Thailand with ${years}+ years of experience
+    subTitle: `Senior Full-Stack Developer from Thailand with ${years}+ years of experience
       owning features end-to-end across React, React Native, Node.js, TypeScript, JavaScript, and Go.
-      Proven track record of high-velocity delivery, interim technical leadership,
-      and translating complex data into executive-level insights.`,
+      Promoted to Senior in 2026 after architecting an in-app AI assistant, driving ฿8.4M of new
+      premium volume from a data-backed catalogue expansion, and helping lead a 29-service backend rewrite.`,
     resumeBtn: "View Résumé",
     githubBtn: "View GitHub",
     contactBtn: "Contact",
     resumeLink:
       "https://drive.google.com/file/d/1KQie2ie0wg0qvmD3pWzrNw2O4j8FgyMF/view?usp=sharing",
-    cardRole: "Full Stack Developer · Thailand",
+    cardRole: "Senior Full-Stack Developer · Thailand",
     stats: [
       `${years}+ yrs experience`,
       "End-to-end delivery",
-      "Interim tech lead"
+      "Co-led 29-service rewrite"
     ]
   },
 
@@ -49,14 +49,15 @@ export const en: Content = {
     headingPre: "Skills &",
     headingEm: "capabilities",
     subTitle:
-      "Middle-to-senior full stack developer — web, mobile, and backend.",
+      "Senior full-stack developer — web, mobile, backend, and AI-assisted delivery.",
     whatIBring: "What I bring",
     techIReach: "Tech I reach for",
     items: [
       `${years}+ years of experience taking features from concept to production across React, React Native, Node.js, and Go.`,
-      "Track record of fast, independent delivery.",
-      "Interim technical leadership and presenting data-backed findings to C-level stakeholders.",
-      "Strong cross-functional communication with designers, PMs, and non-technical teams."
+      "Promoted to Senior in 2026 on measurable business impact — an in-app AI assistant, ฿8.4M of new premium volume, and technical leadership on a company-wide rewrite.",
+      "Track record of fast, independent delivery — and of setting the standards the rest of the team builds against.",
+      "Technical leadership: reference implementations, weekly code review across a 13-developer team, and presenting data-backed findings to C-level stakeholders.",
+      "Strong cross-functional communication with designers, PMs, underwriters, and non-technical teams."
     ]
   },
 
@@ -85,20 +86,22 @@ export const en: Content = {
     eyebrow: "Experience",
     headingPre: "Work",
     headingEm: "experience",
-    sub: "Roles where I owned features end-to-end and led when it mattered.",
+    sub: "Roles where I owned features end-to-end, proved my case with data, and led when it mattered.",
     items: [
       {
-        role: "Full Stack Developer",
+        role: "Senior Full-Stack Developer",
         company: "FIN Insurance Broker Co., Ltd.",
         companyLogo: "finLogo.png",
         link: "https://www.fininsurance.co.th/",
         date: "June 2023 – Present",
         descBullets: [
-          "Feature Delivery: Sole developer on the insurance plan comparison module — shipped dynamic filters, color-coded plan labels, auto-apply coupon system, adjustable sum-insured range, and plan-sharing end-to-end in 5 days.",
-          "Backend & Business Logic: Rebuilt premium search from exact-match to range-based lookup; designed dynamic sum-insured adjustment to expand plan visibility across all insurers. Implemented commission logic covering Tier Bonus, installment budget controls, and multiple payment conditions. Currently one of the lead developers on a major backend migration — splitting a large, aging Node.js v10 codebase (hundreds of APIs in a single project) into properly separated Go microservices.",
-          "UI/UX & Notifications: Led redesign of four core screens (Profile, Premium Check, Level-Up, Plan Comparison) with a cached visualization layer. Built a full notification pipeline covering renewal reminders, licence expiry alerts, badge counts, filters, and mark-as-read.",
-          "Data, Analytics & Scraping: Analysed 5,500+ competitor benchmark records, built web scrapers for market data collection, compiled missing Van and EV models cross-referenced against market pricing, and presented findings with visualisations to C-level stakeholders.",
-          "Leadership & Reliability: Stepped up as interim tech lead during senior absences — owned delivery and made architecture calls independently. Resolved critical production issues (Android crash, random-state bugs) with minimal customer impact, while handling IT support in parallel without affecting delivery timelines.",
+          "Career Progression: Joined as Full Stack Developer (Jun 2023) and promoted to Senior Full-Stack Developer (Jul 2026) on the strength of the in-app AI assistant, the catalogue-expansion work below, and technical leadership on the company-wide backend rewrite.",
+          "FIN AI — In-App AI Assistant: Architected the assistant that answers broker-agent questions end-to-end and owned the frontend + BFF layer, delegating the AI-API integration to a junior developer under my review. Agents compare premiums across plans and issue a real quotation straight from the chat, look up nearby garages, responsible staff, and installment terms, and attach images or PDFs for the assistant to read — with chat history, resumable conversations, and per-day usage quotas. Designed so new capabilities drop in without a rewrite and documented so the team can take it over. Usage tripled from ~600–900 to 2,000+ sessions/month once access opened to more agent tiers.",
+          "Data-Driven Revenue Impact: A campaign meeting concluded our comparison page lost to competitors on pricing. I scraped and auto-matched 5,563 competitor records across 65 car models and showed the opposite — where trims were genuinely comparable our sums insured were higher 81% of the time, and the real gap was coverage: 69.4% of the trims competitors sold, we did not list at all. After the proposal was approved I loaded 42,218 premium rows from 13 insurers into the system (replacing manual Excel entry), every batch signed off by Underwriting. First 6–7 weeks live: ฿8.4M of new premium across 664 closed policies, 77% of them through the comparison engine, +58% month over month — cross-checked against existing trims to confirm net-new volume rather than cannibalisation.",
+          "Technical Leadership — Company-Wide Rewrite: One of the leads splitting an aging Node.js v10 monolith (hundreds of APIs in a single project) into properly separated Go microservices — 29 systems, 2,624 routes, 13 developers. Prototyped the reference service and wrote the frontend/service contracts and coding standards that 15+ systems were built against, then reviewed and merged 75 merge requests across 26 of the 29 systems in weekly review cycles. 27 of 29 systems are migrated with no user-visible disruption, adding full PII encryption, per-user access control, and auditable access trails.",
+          "Feature Delivery & Business Logic: Sole developer on the insurance plan comparison module — dynamic filters, color-coded plan labels, auto-apply coupons, adjustable sum-insured range, and plan sharing shipped end-to-end in 5 days. Rebuilt premium search from exact-match to range-based lookup and designed dynamic sum-insured adjustment to expand plan visibility across all insurers. Implemented commission logic covering Tier Bonus, installment budget controls, commission-preserving installments, and multiple payment conditions.",
+          "UI/UX & Notifications: Led the redesign of core screens (Profile, Premium Check, Level-Up, Plan Comparison, Payment) with a cached visualization layer — the rebuilt profile surfaces referral earnings, paid/pending status, and a cumulative earnings chart. Added image-based car selection and automatic coupon discounts, and built a full notification pipeline covering renewal reminders, licence expiry alerts, badge counts, filters, and mark-as-read.",
+          "Reliability & Support: Stepped up as interim tech lead during senior absences — owned delivery and made architecture calls independently. Resolved critical production issues (Android crash, random-state bugs) with minimal customer impact, and now drive recurring payment failures to their systemic root cause instead of patching case by case, with the explicit goal of removing the ticket rather than closing it.",
           "Self-initiated: Built a real-time collaborative music app on personal time after noticing the team had no good way to share music in the office — complete with a SoundPad and text-to-speech so the team could drop memes and sound effects mid-session. Improved team atmosphere and helped new members settle in naturally from day one."
         ]
       },
@@ -179,7 +182,7 @@ export const en: Content = {
       },
       {
         rank: "advanced",
-        tag: "Beyond Middle Full-Stack",
+        tag: "Beyond Standard Full-Stack",
         note: "Few devs do this",
         title: "Building the tooling, not just using it",
         items: [
@@ -276,7 +279,7 @@ export const en: Content = {
   },
 
   footer: {
-    role: "AI-focused Full Stack Developer · Thailand",
+    role: "AI-focused Senior Full-Stack Developer · Thailand",
     projectHub: "Explore the full project hub",
     copyright: `© ${getYear()} Chaichana Sudjairak. Built with Astro & Tailwind.`
   }
