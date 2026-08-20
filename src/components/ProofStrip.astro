@@ -1,0 +1,49 @@
+---
+/* Three concrete outcomes, directly under the hero — the 20-second version
+   for a recruiter who will not scroll nine screens. */
+import {getContent} from "../data/portfolio";
+import {localePath, caseStudySlug} from "../utils/path";
+
+const t = getContent(Astro.currentLocale).proof;
+const href = localePath(Astro.currentLocale, caseStudySlug);
+---
+
+<section id="proof" class="section reveal !pt-0">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
+        {t.heading}
+      </h2>
+    </div>
+
+    <a
+      href={href}
+      class="text-sm font-semibold text-sky-600 transition-colors hover:text-sky-500 dark:text-sky-400"
+    >
+      {t.caseStudyCta}
+      <span aria-hidden="true">&nbsp;→</span>
+    </a>
+  </div>
+
+  <div class="mt-8 grid gap-5 sm:grid-cols-3">
+    {
+      t.items.map((item, i) => (
+        <article
+          class="glass reveal relative overflow-hidden p-6 transition duration-300 hover:-translate-y-1"
+          style={`transition-delay:${i * 90}ms`}
+        >
+          <span
+            class="pointer-events-none absolute inset-y-0 left-0 w-1"
+            style="background:linear-gradient(to bottom,#0ea5e9,#8b5cf6);"
+            aria-hidden="true"
+          />
+          <div class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+            <span class="gradient-text">{item.value}</span>
+          </div>
+          <p class="text-sub mt-3 text-sm leading-relaxed">{item.label}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

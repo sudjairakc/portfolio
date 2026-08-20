@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import {socialMediaLinks} from "../data/portfolio";
 
 interface Props {
   title?: string;
@@ -24,6 +25,52 @@ const thHref = Astro.site
   ? new URL(`${base}th/`, Astro.site).href
   : `${base}th/`;
 const ogLocale = lang === "th" ? "th_TH" : "en_US";
+
+const ogImage = Astro.site
+  ? new URL(`${base}og-image.png`, Astro.site).href
+  : `${base}og-image.png`;
+
+// Person schema so search engines and AI crawlers can read the profile.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Chaichana Sudjairak",
+  alternateName: "James",
+  jobTitle: "Senior Full-Stack Developer",
+  description,
+  url: canonical,
+  image: ogImage,
+  email: `mailto:${socialMediaLinks.gmail}`,
+  address: {"@type": "PostalAddress", addressCountry: "TH"},
+  sameAs: [
+    socialMediaLinks.github,
+    socialMediaLinks.linkedin,
+    socialMediaLinks.gitlab
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "FIN Insurance Broker Co., Ltd.",
+    url: "https://www.fininsurance.co.th/"
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Burapha University",
+    address: {"@type": "PostalAddress", addressCountry: "TH"}
+  },
+  knowsLanguage: ["th", "en"],
+  knowsAbout: [
+    "React",
+    "React Native",
+    "Next.js",
+    "Node.js",
+    "Go",
+    "TypeScript",
+    "PostgreSQL",
+    "Docker",
+    "AWS",
+    "AI-assisted software delivery"
+  ]
+};
 ---
 
 <!doctype html>
@@ -48,9 +95,24 @@ const ogLocale = lang === "th" ? "th_TH" : "en_US";
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={ogLocale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Chaichana Sudjairak — Senior Full-Stack Developer"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured data -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(personSchema)}
+      is:inline
+    />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href={`${base}favicon.png`} />

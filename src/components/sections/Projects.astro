@@ -52,7 +52,7 @@ const cards = t.items.map(project => {
             aria-hidden="true"
           />
 
-          {project.image && (
+          {project.image ? (
             <div class="mb-5 w-16 h-16 rounded-2xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-900/5 flex items-center justify-center">
               <img
                 src={`${base}images/${project.image}`}
@@ -62,6 +62,16 @@ const cards = t.items.map(project => {
                 decoding="async"
               />
             </div>
+          ) : (
+            project.icon && (
+              <div
+                class="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl text-white shadow-sm"
+                style="background:linear-gradient(135deg,#0ea5e9,#8b5cf6);"
+                aria-hidden="true"
+              >
+                <i class={`${project.icon} text-xl`} />
+              </div>
+            )
           )}
 
           <h3 class="font-semibold text-lg leading-snug mb-3">
@@ -78,10 +88,36 @@ const cards = t.items.map(project => {
           )}
 
           {project.desc.length > 0 && (
-            <p class="text-sub text-sm leading-relaxed mt-auto">
+            <p class="text-sub text-sm leading-relaxed">
               {project.desc.join(" ")}
             </p>
           )}
+
+          {/* Links, or an honest reason there are none. */}
+          <div class="mt-auto pt-5 border-t border-slate-900/5 dark:border-white/10">
+            {project.links && project.links.length > 0 ? (
+              <div class="flex flex-wrap gap-2">
+                {project.links.map(link => (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="pill font-semibold transition-colors hover:text-sky-500"
+                  >
+                    {link.label}
+                    <span aria-hidden="true">&nbsp;↗</span>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              project.privateNote && (
+                <p class="text-sub text-xs italic">
+                  <i class="fas fa-lock mr-1.5 not-italic" aria-hidden="true" />
+                  {project.privateNote}
+                </p>
+              )
+            )}
+          </div>
         </article>
       ))
     }

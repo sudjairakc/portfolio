@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CaseStudyContent from "../../components/CaseStudyContent.astro";
+import {getContent} from "../../data/portfolio";
+
+const cs = getContent("en").caseStudy;
+---
+
+<Layout lang="en" title={cs.metaTitle} description={cs.metaDescription}>
+  <Navbar />
+  <CaseStudyContent />
+  <Footer />
+</Layout>

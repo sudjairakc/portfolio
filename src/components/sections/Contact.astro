@@ -64,12 +64,39 @@ const t = getContent(Astro.currentLocale).contact;
       </div>
 
       {
+        /* Phone is assembled client-side so naive scrapers get nothing
+           useful out of the static HTML. */
         t.phone && (
-          <a href={`tel:${t.phone.replace(/[^0-9+]/g, "")}`} class="pill">
-            {t.phone}
-          </a>
+          <button
+            type="button"
+            id="reveal-phone"
+            class="pill font-semibold transition-colors hover:text-sky-500"
+            data-p={btoa(t.phone)}
+          >
+            <i class="fas fa-phone text-[0.7rem]" aria-hidden="true" />
+            {t.phoneLabel}
+          </button>
         )
       }
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    const btn = document.getElementById("reveal-phone");
+    if (!btn) return;
+    btn.addEventListener(
+      "click",
+      () => {
+        const phone = atob(btn.dataset.p || "");
+        const link = document.createElement("a");
+        link.href = `tel:${phone.replace(/[^0-9+]/g, "")}`;
+        link.className = btn.className;
+        link.textContent = phone;
+        btn.replaceWith(link);
+      },
+      {once: true}
+    );
+  })();
+</script>

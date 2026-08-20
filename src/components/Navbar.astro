@@ -10,17 +10,25 @@ const currentLang = (Astro.currentLocale ?? defaultLang) as "en" | "th";
 const t = getContent(currentLang);
 const base = import.meta.env.BASE_URL;
 
+// Home URL per locale (en = root, th = /th/).
+const homeHref = currentLang === defaultLang ? base : `${base}${currentLang}/`;
+
+// Section links are absolute so they also work from subpages (case studies).
 const links = [
-  {label: t.nav.skills, href: "#skills"},
-  {label: t.nav.experience, href: "#experience"},
-  {label: t.nav.ai, href: "#ai"},
-  {label: t.nav.projects, href: "#projects"},
-  {label: t.nav.contact, href: "#contact"}
+  {label: t.nav.skills, href: `${homeHref}#skills`},
+  {label: t.nav.experience, href: `${homeHref}#experience`},
+  {label: t.nav.ai, href: `${homeHref}#ai`},
+  {label: t.nav.projects, href: `${homeHref}#projects`},
+  {label: t.nav.contact, href: `${homeHref}#contact`}
 ];
 
-// Home URL per locale (en = root, th = /th/).
+// Language switcher keeps the reader on the same page where possible.
+const path = Astro.url.pathname;
+const subPath = path.startsWith(`${base}th/`)
+  ? path.slice(`${base}th/`.length)
+  : path.slice(base.length);
 const localeHref = (code: string) =>
-  code === defaultLang ? base : `${base}${code}/`;
+  code === defaultLang ? `${base}${subPath}` : `${base}${code}/${subPath}`;
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 px-4 pt-4">
@@ -30,7 +38,7 @@ const localeHref = (code: string) =>
   >
     <!-- Logo -->
     <a
-      href="#home"
+      href={homeHref}
       class="font-mono text-sm font-bold tracking-tight sm:text-base"
     >
       &lt; <span class="gradient-text">ChaichanaS</span> /&gt;

@@ -8,7 +8,6 @@
 |---|---|
 | Framework | **Astro 5** (static site, islands architecture) |
 | Styling | **Tailwind CSS v4** (CSS-first, no config file) |
-| Animations | **lottie-web** (vanilla JS, not lottie-react) |
 | Icons | Font Awesome 6 + Devicon via CDN |
 | Language | TypeScript |
 | Deploy | GitHub Actions → GitHub Pages (`gh-pages` branch) |
@@ -18,38 +17,45 @@
 ```
 src/
   data/
-    portfolio.ts       ← All personal content lives here. Edit this to update the site.
+    portfolio.ts       ← Locale-independent config (socials, tech stack) + getContent()
+    content/
+      types.ts         ← Content interface. en.ts is authoritative; th.ts mirrors it.
+      en.ts / th.ts    ← ALL copy lives here. Edit these to update the site.
   utils/
     date.ts            ← getYear() helper
+    path.ts            ← localePath() + caseStudySlug for locale-aware URLs
   styles/
     global.css         ← Tailwind import, CSS custom properties, utility classes
   layouts/
-    Layout.astro       ← HTML shell, dark mode init script, Font Awesome 6 + Devicon CDN
+    Layout.astro       ← HTML shell, dark-mode init, og/JSON-LD meta, reveal observer
   components/
-    Header.astro       ← Sticky nav + mobile menu + dark mode toggle
+    Navbar.astro       ← Fixed pill nav, mobile menu, language switcher, theme toggle
+    Hero.astro         ← Greeting, badge, CTAs, socials, tech card
+    ProofStrip.astro   ← Three outcome cards under the hero + case-study link
+    HomeContent.astro  ← Assembles the home page sections; scroll-to-top button
+    CaseStudyContent.astro ← Shared body for the case-study route
     Footer.astro
-    SplashScreen.astro ← Full-screen loader (2 s, then fades out)
-    LottiePlayer.astro ← Renders a lottie JSON from public/lottie/ via path
-    ThemeToggle.astro  ← Pill toggle button, persists to localStorage
-    SocialMedia.astro  ← Social icon row driven by portfolio.ts
     sections/
-      Greeting.astro
       Skills.astro
       Education.astro
       WorkExperience.astro
+      AICollaboration.astro
       Projects.astro
       Contact.astro
   pages/
-    index.astro        ← Assembles all sections; scroll-to-top button
+    index.astro                        ← en home
+    th/index.astro                     ← th home
+    case-study/model-catalogue.astro   ← en case study
+    th/case-study/model-catalogue.astro
 public/
-  images/              ← Company/school logos (PNG)
-  lottie/              ← Lottie JSON files (loading, sitPerson, reactDev, email)
-  favicon.png + apple-touch-icon.png
+  images/              ← Company/school/project logos (PNG)
+  og-image.png         ← 1200×630 social card (regenerate with rsvg-convert)
+  favicon.png + apple-touch-icon.png + manifest.json + robots.txt
 ```
 
 ## Dark Mode
 
-- Driven by `html.dark` class (set/toggled by `ThemeToggle.astro`).
+- Driven by `html.dark` class (set/toggled by the theme button in `Navbar.astro`).
 - Persisted to `localStorage.isDark`.
 - An inline `<script is:inline>` in `Layout.astro` reads localStorage **before paint** to avoid flash of wrong theme.
 - All theme-aware colours use CSS custom properties: `var(--bg)`, `var(--text)`, `var(--card-bg)`, etc. Defined in `global.css`.
@@ -63,31 +69,52 @@ public/
 
 ## Updating Content
 
-**All personal content** is in [`src/data/portfolio.ts`](src/data/portfolio.ts).
+**All copy** is in [`src/data/content/en.ts`](src/data/content/en.ts) and
+[`src/data/content/th.ts`](src/data/content/th.ts). Both must satisfy
+[`types.ts`](src/data/content/types.ts) — `en.ts` defines the shape, `th.ts` mirrors it,
+so adding a field means editing all three or the build fails.
 
-- Change greeting, social links, skills, education, work experience, or projects there.
+Locale-independent config (social links, tech-stack icons, hero chips) stays in
+[`src/data/portfolio.ts`](src/data/portfolio.ts).
+
 - Image filenames reference files in `public/images/`. Add new images there.
-- Lottie animations reference files in `public/lottie/`. Add new ones there.
+- A project with no `image` falls back to its `icon` (Font Awesome class).
+- Projects with no public URL use `privateNote` instead of `links`.
+
+### Claims discipline
+
+Numbers on this site are ratios and counts of James's own work. Employer revenue,
+currency amounts, carrier names, table names, and raw record counts stay out — see the
+`disclosure` field in the case-study content. Don't reintroduce them.
 
 ## Adding a New Section
 
-1. Create `src/components/sections/MySection.astro`.
-2. Import data from `src/data/portfolio.ts`.
-3. Add it to `src/pages/index.astro`.
-4. Optionally add a nav link in `src/components/Header.astro`.
+1. Add the fields to `Content` in `src/data/content/types.ts`.
+2. Fill them in **both** `en.ts` and `th.ts`.
+3. Create `src/components/sections/MySection.astro`, reading
+   `getContent(Astro.currentLocale)`.
+4. Add it to `src/components/HomeContent.astro` (shared by both locales).
+5. Optionally add a nav link in `src/components/Navbar.astro` — section links there are
+   absolute (`${homeHref}#id`) so they also work from the case-study subpages.
 
-## LottiePlayer Usage
+## Adding a New Page
 
-```astro
-<LottiePlayer src="lottie/myAnimation.json" class="w-64 h-64" />
-```
-
-- `src` is relative to `public/` (no leading `/`).
-- The component prepends `import.meta.env.BASE_URL` automatically.
+Create the route twice — `src/pages/foo.astro` and `src/pages/th/foo.astro` — both
+rendering one shared body component, the way the case study does. Build locale-aware
+links with `localePath()` from `src/utils/path.ts`; never hardcode `/portfolio/`.
 
 ## Scroll Animations
 
-Add class `reveal`, `reveal-left`, or `reveal-right` to any element. An `IntersectionObserver` in `Layout.astro` adds `.visible` when the element enters the viewport, triggering a CSS fade-in.
+Add class `reveal`, `reveal-left`, or `reveal-right` to any element. An
+`IntersectionObserver` in `Layout.astro` adds **`.is-visible`** when the element enters
+the viewport, triggering a CSS fade-in. Elements start at `opacity: 0`, so anything
+rendered outside that observer's reach stays invisible.
+
+## Social Card
+
+`public/og-image.png` is 1200×630 and referenced as an absolute URL via `Astro.site`.
+It is generated from an SVG with `rsvg-convert -w 1200 -h 630 og.svg -o public/og-image.png`.
+Regenerate it whenever the headline role or the proof points change.
 
 ## Local Development
 

@@ -19,10 +19,21 @@ export interface WorkExperience {
   desc?: string;
 }
 
+export interface ProjectLink {
+  label: string;
+  href: string;
+}
+
 export interface Project {
-  image: string;
+  /** Logo in public/images/. Omit to fall back to `icon`. */
+  image?: string;
+  /** Font Awesome class used when there is no logo. */
+  icon?: string;
   projectName: string;
   descBullets: string[];
+  links?: ProjectLink[];
+  /** Shown when a project has no public link (client work under NDA). */
+  privateNote?: string;
 }
 
 export interface AiStat {
@@ -30,23 +41,9 @@ export interface AiStat {
   label: string;
 }
 
-export interface AiModel {
-  name: string;
-  vendor: string;
-  autonomous?: boolean;
-}
-
-export interface AiTierItem {
+export interface AiPractice {
   name: string;
   desc: string;
-}
-
-export interface AiTier {
-  rank: "specialist" | "advanced" | "baseline";
-  tag: string;
-  note: string;
-  title: string;
-  items: AiTierItem[];
 }
 
 export interface AiSection {
@@ -55,12 +52,44 @@ export interface AiSection {
   headingEm: string;
   headline: string;
   intro: string;
-  modelsLabel: string;
-  ladderLabel: string;
-  rarerLabel: string;
+  stackLabel: string;
+  stack: string[];
+  practicesLabel: string;
+  practices: AiPractice[];
   stats: AiStat[];
-  models: AiModel[];
-  tiers: AiTier[];
+  /** Honest note on what an outsider can and cannot inspect. */
+  note: string;
+}
+
+export interface ProofPoint {
+  value: string;
+  label: string;
+}
+
+export interface CaseStudyStep {
+  step: string;
+  title: string;
+  body: string;
+}
+
+export interface CaseStudy {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  titlePre: string;
+  titleEm: string;
+  standfirst: string;
+  factsLabel: string;
+  facts: {label: string; value: string}[];
+  outcomesLabel: string;
+  outcomes: ProofPoint[];
+  steps: CaseStudyStep[];
+  takeawayLabel: string;
+  takeaways: string[];
+  disclosureLabel: string;
+  disclosure: string;
+  backLabel: string;
+  contactCta: string;
 }
 
 export interface Content {
@@ -90,6 +119,14 @@ export interface Content {
     stats: string[];
   };
 
+  /** Three verifiable outcomes, shown directly under the hero. */
+  proof: {
+    eyebrow: string;
+    heading: string;
+    items: ProofPoint[];
+    caseStudyCta: string;
+  };
+
   skills: {
     eyebrow: string;
     headingPre: string;
@@ -113,6 +150,7 @@ export interface Content {
     headingPre: string;
     headingEm: string;
     sub: string;
+    caseStudyCta: string;
     items: WorkExperience[];
   };
 
@@ -126,6 +164,8 @@ export interface Content {
     items: Project[];
   };
 
+  caseStudy: CaseStudy;
+
   contact: {
     eyebrow: string;
     headingPre: string;
@@ -133,6 +173,7 @@ export interface Content {
     subtitle: string;
     emailBtn: string;
     email: string;
+    phoneLabel: string;
     phone: string;
   };
 

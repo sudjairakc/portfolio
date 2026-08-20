@@ -22,13 +22,6 @@ export function getContent(locale: string | undefined): Content {
   return content[(locale as Lang) in content ? (locale as Lang) : defaultLang];
 }
 
-// ─── Splash Screen ────────────────────────────────────────────────────────────
-
-export const splashScreen = {
-  enabled: true,
-  duration: 2000
-};
-
 // ─── Social Media (locale-independent) ─────────────────────────────────────────
 
 export const socialMediaLinks = {
@@ -76,7 +69,3 @@ export const heroChips = [
   "Go",
   "Next.js"
 ];
-
-// ─── Misc ─────────────────────────────────────────────────────────────────────
-
-export const isHireable = true;

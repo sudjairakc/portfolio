@@ -1,0 +1,155 @@
+---
+/* Shared body for the case-study route in every locale. */
+import {getContent} from "../data/portfolio";
+import {localePath} from "../utils/path";
+
+const t = getContent(Astro.currentLocale).caseStudy;
+const home = localePath(Astro.currentLocale);
+---
+
+<main class="relative overflow-hidden">
+  <!-- Ambient blobs, same language as the hero -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+  >
+    <div
+      class="blob float-slower absolute -top-24 -left-16 h-80 w-80 rounded-full bg-sky-400/25 blur-3xl dark:bg-sky-500/20"
+    >
+    </div>
+    <div
+      class="blob absolute top-32 right-0 h-96 w-96 rounded-full bg-violet-400/20 blur-3xl dark:bg-violet-500/15"
+    >
+    </div>
+  </div>
+
+  <article class="section pt-28 lg:pt-32">
+    <!-- Back link -->
+    <a
+      href={home}
+      class="text-sub inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:text-sky-500"
+    >
+      <span aria-hidden="true">←</span>
+      {t.backLabel}
+    </a>
+
+    <!-- Title block -->
+    <header class="mt-8 max-w-3xl">
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h1
+        class="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
+      >
+        {t.titlePre}<br />
+        <span class="gradient-text">{t.titleEm}</span>
+      </h1>
+      <p class="text-sub mt-6 text-base leading-relaxed sm:text-lg">
+        {t.standfirst}
+      </p>
+    </header>
+
+    <!-- Facts -->
+    <section class="mt-12">
+      <h2 class="eyebrow">{t.factsLabel}</h2>
+      <dl class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          t.facts.map(fact => (
+            <div class="glass reveal p-5">
+              <dt class="text-sub text-xs font-semibold tracking-wide uppercase">
+                {fact.label}
+              </dt>
+              <dd class="mt-2 text-sm leading-snug font-semibold">
+                {fact.value}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <!-- Outcomes -->
+    <section class="mt-12">
+      <h2 class="text-lg font-semibold tracking-tight">{t.outcomesLabel}</h2>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          t.outcomes.map((o, i) => (
+            <div
+              class="glass reveal relative overflow-hidden p-6 text-center"
+              style={`transition-delay:${i * 80}ms`}
+            >
+              <span
+                class="pointer-events-none absolute inset-x-0 top-0 h-1"
+                style="background:linear-gradient(to right,#0ea5e9,#8b5cf6,#d946ef);"
+                aria-hidden="true"
+              />
+              <div class="text-3xl font-extrabold tracking-tight">
+                <span class="gradient-text">{o.value}</span>
+              </div>
+              <p class="text-sub mt-2.5 text-xs leading-relaxed">{o.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Narrative -->
+    <section class="relative mt-16">
+      <span
+        class="pointer-events-none absolute top-2 bottom-2 left-[13px] w-px sm:left-[15px]"
+        style="background: linear-gradient(to bottom, rgba(14,165,233,0.5), rgba(139,92,246,0.5), rgba(217,70,239,0.08));"
+        aria-hidden="true"></span>
+
+      <ol class="space-y-8">
+        {
+          t.steps.map(s => (
+            <li class="relative pl-12 sm:pl-14 reveal-right">
+              <span
+                class="absolute left-0 top-0 flex h-7 w-7 items-center justify-center rounded-full text-[0.7rem] font-bold text-white sm:h-8 sm:w-8"
+                style="background:linear-gradient(135deg,#0ea5e9,#8b5cf6);"
+                aria-hidden="true"
+              >
+                {s.step}
+              </span>
+              <h3 class="text-lg font-semibold tracking-tight">{s.title}</h3>
+              <p class="text-sub mt-3 max-w-3xl text-[0.95rem] leading-relaxed">
+                {s.body}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!-- Takeaways -->
+    <section class="mt-16 max-w-3xl">
+      <h2 class="text-lg font-semibold tracking-tight">{t.takeawayLabel}</h2>
+      <ul class="mt-5 space-y-3">
+        {
+          t.takeaways.map(item => (
+            <li class="flex items-start gap-3">
+              <span
+                class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+                style="background: linear-gradient(to right, #0ea5e9, #8b5cf6);"
+                aria-hidden="true"
+              />
+              <span class="text-sub text-[0.95rem] leading-relaxed">
+                {item}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- Disclosure -->
+    <aside class="glass mt-12 max-w-3xl p-6">
+      <h2 class="eyebrow">{t.disclosureLabel}</h2>
+      <p class="text-sub mt-3 text-sm leading-relaxed">{t.disclosure}</p>
+    </aside>
+
+    <!-- Footer actions -->
+    <div class="mt-12 flex flex-wrap items-center gap-3">
+      <a href={`${home}#contact`} class="btn-gradient">{t.contactCta}</a>
+      <a href={home} class="btn-ghost">{t.backLabel}</a>
+    </div>
+  </article>
+</main>
