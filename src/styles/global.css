@@ -306,11 +306,43 @@ html.dark body {
     transform: translate(24px, -18px);
   }
 }
+/* Ambient background orbs.
+   Painted as a radial gradient that reaches zero alpha at its own edge, so an
+   ancestor's `overflow: hidden` can never reveal a hard cut — and the browser
+   never has to rasterize a blur filter. Colour comes from a --blob variant. */
 .blob {
   animation: drift 16s ease-in-out infinite;
   will-change: transform;
-  /* smaller blur radius = far cheaper to rasterize (Tailwind v4 var override) */
-  --tw-blur: blur(40px);
+  border-radius: 9999px;
+  background-image: radial-gradient(
+    closest-side,
+    var(--blob, rgba(56, 189, 248, 0.36)) 0%,
+    transparent 100%
+  );
+}
+.blob-sky {
+  --blob: rgba(56, 189, 248, 0.38);
+}
+.blob-violet {
+  --blob: rgba(167, 139, 250, 0.38);
+}
+.blob-emerald {
+  --blob: rgba(52, 211, 153, 0.32);
+}
+.blob-fuchsia {
+  --blob: rgba(232, 121, 249, 0.34);
+}
+html.dark .blob-sky {
+  --blob: rgba(14, 165, 233, 0.3);
+}
+html.dark .blob-violet {
+  --blob: rgba(139, 92, 246, 0.3);
+}
+html.dark .blob-emerald {
+  --blob: rgba(16, 185, 129, 0.24);
+}
+html.dark .blob-fuchsia {
+  --blob: rgba(217, 70, 239, 0.26);
 }
 
 /* ── Gentle float for cards ────────────────────────────────────────────────── */

@@ -33,13 +33,13 @@ const localeHref = (code: string) =>
 
 <header class="fixed inset-x-0 top-0 z-50 px-4 pt-4">
   <nav
-    class="glass mx-auto flex max-w-4xl items-center justify-between gap-4 !rounded-full px-4 py-2.5 sm:px-6"
+    class="glass mx-auto flex max-w-5xl items-center justify-between gap-3 !rounded-full px-4 py-2 sm:px-5"
     aria-label="Primary"
   >
     <!-- Logo -->
     <a
       href={homeHref}
-      class="font-mono text-sm font-bold tracking-tight sm:text-base"
+      class="shrink-0 font-mono text-sm font-bold tracking-tight whitespace-nowrap sm:text-base"
     >
       &lt; <span class="gradient-text">ChaichanaS</span> /&gt;
     </a>
@@ -51,7 +51,7 @@ const localeHref = (code: string) =>
           <li>
             <a
               href={l.href}
-              class="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-white/60 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
+              class="flex h-9 items-center rounded-full px-3 text-sm font-medium whitespace-nowrap text-slate-600 transition hover:bg-white/60 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
             >
               {l.label}
             </a>
@@ -61,17 +61,17 @@ const localeHref = (code: string) =>
     </ul>
 
     <!-- Actions -->
-    <div class="flex items-center gap-2">
+    <div class="flex shrink-0 items-center gap-2">
       <!-- Language switcher -->
       <div
-        class="flex items-center rounded-full border border-slate-300/60 bg-white/40 p-0.5 text-xs font-semibold dark:border-white/10 dark:bg-white/5"
+        class="flex h-9 items-center rounded-full border border-slate-300/60 bg-white/40 p-1 text-xs font-semibold dark:border-white/10 dark:bg-white/5"
       >
         {
           languages.map(l => (
             <a
               href={localeHref(l.code)}
               class:list={[
-                "rounded-full px-2.5 py-1 transition",
+                "flex h-7 items-center rounded-full px-2.5 transition",
                 l.code === currentLang
                   ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900"
                   : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
@@ -88,7 +88,7 @@ const localeHref = (code: string) =>
         href="https://sudjairakc.github.io"
         target="_blank"
         rel="noopener"
-        class="pill hidden md:inline-flex"
+        class="pill h-9 !px-4 whitespace-nowrap hidden md:inline-flex"
         aria-label="Project hub"
       >
         {t.nav.projectHub}
@@ -140,7 +140,7 @@ const localeHref = (code: string) =>
         href={socialMediaLinks.github}
         target="_blank"
         rel="noopener"
-        class="btn-primary !px-4 !py-2 !text-sm"
+        class="btn-primary h-9 !px-4 !py-0 !text-sm whitespace-nowrap"
       >
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"
           ><path
