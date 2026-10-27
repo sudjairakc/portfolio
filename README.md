@@ -1,5 +1,7 @@
 # Portfolio — Chaichana Sudjairak
 
+> **Moved:** this portfolio now lives at **https://sudjairakc.github.io** (source: [sudjairakc/sudjairakc.github.io](https://github.com/sudjairakc/sudjairakc.github.io)). This repo only deploys the redirect pages in `redirect/`, so old `/portfolio/` links keep working. The Astro source below is kept for reference.
+
 Portfolio ส่วนตัว สไตล์ **glassmorphism / Apple-like** สร้างด้วย **Astro 5** + **Tailwind CSS v4**
 (ใช้ design system เดียวกับ project hub ที่ [sudjairakc.github.io](https://sudjairakc.github.io))
 
